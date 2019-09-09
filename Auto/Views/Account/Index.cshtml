@@ -1,0 +1,18 @@
+﻿@model List<Auto.Models.ApplicationUser>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@foreach (Auto.Models.ApplicationUser user in Model)
+{
+    <p>
+        @Html.DisplayFor(modelItem => user.Email)
+    </p>    
+    <p>
+        <form method="post" action="/Account/Delete/@user.Id">
+            <input type="submit" value="удалить" />
+        </form>
+    </p>
+    
+}

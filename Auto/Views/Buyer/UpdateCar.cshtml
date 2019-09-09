@@ -1,0 +1,31 @@
+﻿@model Auto.ModelsApp.UpdateCar
+@{
+    Layout = "~/Views/Shared/User.cshtml";
+    ViewBag.Title = "Обновить";
+}
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="~/Content/Site.css" />
+</head>
+<body>
+    <div id="start">
+        <h4>  Выберите файл для загрузки</h4>
+        @using (Html.BeginForm("UpdateCar", "Buyer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <label class="control-label">Бренд: </label>
+            @Html.DropDownList("BrandId", Model.Brands as SelectList,
+                        htmlAttributes: new { @class = "form-control" })
+            <input type="hidden" value="@Model.Car.Id" name="Id" />
+            <input class="enter" type="file" name="upload" /><br>
+            <label for="1">Название модели</label>
+            <input id="1" class="enter" type="text" required="required" name="Name" value="@Model.Car.Name" /><br>
+            <label for="2">Бренд</label>
+            <input id="2" class="enter" type="text" required="required" name="CarBrand" value="@Model.Car.CarBrand" /><br>
+            <label for="4">Цена</label>
+            <input id="4" class="enter" type="text" required="required" name="Price" value="@Model.Car.Price" /><br>
+            <textarea name="Info" required="required" value="@Model.Car.Info"></textarea>
+            <input class="enter" type="submit" value="Загрузить" />
+        }
+    </div>
+</body>
+</html>

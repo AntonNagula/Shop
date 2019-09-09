@@ -1,0 +1,24 @@
+﻿@model Auto.ModelsApp.AppBuyer
+@{
+    Layout = "~/Views/Shared/User.cshtml";
+    ViewBag.Title = "Connect";
+}
+@using (Html.BeginForm("Connect", "Buyer", FormMethod.Post, new { @class = "well" }))
+{
+    <label>Ваша почта</label><br />
+    <input class="enter" type="text" name="From" placeholder="можете не указывать если вы под ней зарегистрированы" /><br>
+                                                                                                                      
+    <label>Ваш пароль от почты</label><br />
+    <input class="enter" type="text" required="required" name ="password" placeholder="обязательно" /><br>
+                                                                                         
+    <label>Почта получателя</label><br />
+    <input class="enter" type="text" value="@Model.Email" name="To"  placeholder="Если указаннпя почта актуальна, можно не вводить" /><br>
+  
+    <label>Тема</label><br />
+    <input class="enter" type="text" name="Subject" placeholder="Тема письма" /><br>
+
+    <label>Письмо</label><br />
+    <input class="enter" type="text" name="Body" placeholder="Письмо" /><br>
+
+    <input type="submit" class="btn" value="Send" />
+}

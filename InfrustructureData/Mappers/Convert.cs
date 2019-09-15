@@ -11,60 +11,7 @@ namespace InfrustructureData.Mappers
 {
     public static class Convert
     {
-        //public static Car FromRepoCarToCar(this RepoCar item)
-        //{
-        //    return new Car
-        //    {
-        //        Id = item.Id,
-        //        Name = item.Name,
-        //        CarBrand = item.CarBrand,
-        //        Price = item.Price,
-        //        ExtencionName = item.ExtencionName,
-        //        Info = item.Info,
-        //        Count_Of_Unit = item.Count_Of_Unit,
-        //        image = item.image,
-        //        BuyCars = item.BuyCars.Select(x => x.FromRepoBuyCarToBuyCar()).ToList(),
-        //    };
-        //}        
-
-        //public static RepoCar FromCarToRepoCar(this Car item)
-        //{
-        //    return new RepoCar
-        //    {
-        //        Id = item.Id,
-        //        Name = item.Name,
-        //        CarBrand = item.CarBrand,
-        //        Price = item.Price,
-        //        ExtencionName = item.ExtencionName,
-        //        Info = item.Info,
-        //        Count_Of_Unit=item.Count_Of_Unit,
-        //        image=item.image,
-        //        //BuyCars = item.BuyCars.Select(x=>x.FromBuyCarToRepoBuyCar()).ToList(),
-        //    };
-        //}
-
-        //public static Buyer FromRepoBuyerToBuyer(this RepoBuyer item)
-        //{
-        //    return new Buyer
-        //    {
-        //        Id = item.Id,
-        //        Email= item.Email,
-        //        Password=item.Password,
-        //        BuyCars = item.BuyCars.Select(x => x.FromRepoBuyCarToBuyCar()).ToList()
-        //    };
-        //}
-
-        //public static RepoBuyer FromBuyerToRepoBuyer(this Buyer item)
-        //{
-        //    return new RepoBuyer
-        //    {
-        //        Id = item.Id,
-        //        Email = item.Email,
-        //        Password = item.Password,
-        //        //BuyCars=item.BuyCars.Select(x=>x.FromBuyCarToRepoBuyCar()).ToList() 
-        //    };
-        //}
-
+        
         public static int FromCarToInt(this Car item)
         {
             return item.Id;
@@ -134,17 +81,5 @@ namespace InfrustructureData.Mappers
             .ForMember(x => x.BuyCars, _ => _.Ignore()));
             return Mapper.Map<Buyer, RepoBuyer>(item);
         }
-
-        //public static BuyCar FromRepoBuyCarToBuyCar(this RepoBuyCar item)
-        //{
-        //    Mapper.Initialize(cfg => cfg.CreateMap<RepoBuyCar, BuyCar>());
-        //    return Mapper.Map<RepoBuyCar, BuyCar>(item);
-        //}
-
-        //public static RepoBuyCar FromBuyCarToRepoBuyCar(this BuyCar item)
-        //{
-        //    Mapper.Initialize(cfg => cfg.CreateMap<BuyCar, RepoBuyCar>()); 
-        //    return Mapper.Map<BuyCar, RepoBuyCar>(item);
-        //}
     }
 }

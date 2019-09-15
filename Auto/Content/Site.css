@@ -92,15 +92,15 @@ textarea.enter {
 
 a {
     text-decoration: none;
-    margin-left:10px;
 }
-a.links:focus
-{
-    background:red;
-    color:aliceblue;
-    border-radius:4px;
-
-}
+    a.links:hover {
+        background: red;
+        color: aliceblue;
+        border-radius: 4px;
+        padding: 5px;
+        text-decoration: none;
+        margin-top:8px;
+    }
     a:focus {
         text-decoration: none;
     }

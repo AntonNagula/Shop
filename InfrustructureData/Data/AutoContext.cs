@@ -4,7 +4,7 @@ using InfrustructureData.DataModels;
 using Microsoft.EntityFrameworkCore;
 namespace InfrustructureData.Data
 {
-    public class AutoContext : DbContext,IAutoContext
+    public class AutoContext : DbContext
     {
         public DbSet<Buyer> Buyers { get; set; }
         public DbSet<Car> Cars { get; set; }

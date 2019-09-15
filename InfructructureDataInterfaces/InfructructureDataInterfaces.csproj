@@ -46,7 +46,6 @@
     <Compile Include="Models\RepoBuyer.cs" />
     <Compile Include="Models\RepoCar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\IAutoContext.cs" />
     <Compile Include="Repositories\IRepositories.cs" />
     <Compile Include="Repositories\IUnitOfWork.cs" />
     <Compile Include="Repositories\PurchaseRepository.cs" />

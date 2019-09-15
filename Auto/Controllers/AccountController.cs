@@ -112,7 +112,7 @@ namespace Auto.Controllers
                 IdentityResult result = await UserManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
-                    List<ApplicationUser> Users = UserManager.Users.ToList();
+                    List<ApplicationUser> Users = UserManager.Users.Where(x => x.Email != HttpContext.User.Identity.Name).ToList();
                     return View(Users);
                 }
                 else

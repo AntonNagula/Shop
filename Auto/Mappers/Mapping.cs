@@ -30,7 +30,8 @@ namespace Auto.Mappers
                 Info = item.Info,
                 image = item.image,
                 OwnerId=item.OwnerId,
-                BrandId=item.BrandId, 
+                BrandId=item.BrandId,
+                Status=item.Status
             };
         }
 
@@ -47,6 +48,7 @@ namespace Auto.Mappers
                 image = item.image,
                 OwnerId = item.OwnerId,
                 BrandId = item.BrandId,
+                Status=item.Status
             };
         }
 

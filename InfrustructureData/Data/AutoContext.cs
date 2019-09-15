@@ -21,7 +21,7 @@ namespace InfrustructureData.Data
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=ShopAutoContext;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Shop;Trusted_Connection=True;");
             
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,6 +30,33 @@ namespace InfrustructureData.Data
             modelBuilder.ApplyConfiguration(new ConfigCar());
             modelBuilder.ApplyConfiguration(new ConfigBuyer());
             modelBuilder.ApplyConfiguration(new ConfigBrand());
+
+            modelBuilder.Entity<Buyer>().HasData(
+            new Buyer[]
+            {
+                new Buyer { Id=1, Email="any@mail.ru"},
+                new Buyer { Id=2, Email="some@mail.ru"},                
+            });
+
+            modelBuilder.Entity<Brands>().HasData(
+            new Brands[]
+            {
+                new Brands { Id=1, BrandName="BMW"},
+                new Brands { Id=2, BrandName="Mercedes"},
+                new Brands { Id=3, BrandName="Aston Martin"},
+                new Brands { Id=4, BrandName="Ferrari"}
+            });
+
+            modelBuilder.Entity<Car>().HasData(
+            new Car[]
+            {
+                new Car { Id=1, ExtencionName="BMW i8.jpg", CarBrand="BMW", Name="BMW i8", BrandId=1, OwnerId=1, Price=20000, Status="Продается"},
+                new Car { Id=2, ExtencionName="BMW i8 Spyder.jpg", CarBrand="BMW", Name="BMW i8 Spyder", BrandId=1, OwnerId=2, Price=20000, Status="Продается"},
+                new Car { Id=3, ExtencionName="Mercedes-Benz GLE Coupe.jpg", CarBrand="Mercedes", Name="Mercedes-Benz GLE Coupe", BrandId=2, OwnerId=1, Price=20000, Status="Продается"},
+                new Car { Id=4, ExtencionName="Aston Martin DB11.jpg", CarBrand="Aston Martin", Name="Aston Martin DB11", BrandId=3, OwnerId=2, Price=20000, Status="Продается"},
+                new Car { Id=5, ExtencionName="Ferrari 488 GTB.jpg", CarBrand="Ferrari", Name="Ferrari 488 GTB", BrandId=4, OwnerId=2, Price=20000, Status="Продается"},
+            });
+
             base.OnModelCreating(modelBuilder);
         }
     }

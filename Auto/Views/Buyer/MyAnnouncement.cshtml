@@ -14,6 +14,7 @@
             <th>Название модели</th>
             <th>Стоимость</th>
             <th>Изображение</th>
+            <th>Статус</th>
             <th>Покупатели</th>
             <th>Редактирование</th>
             <th>Удаление</th>
@@ -31,6 +32,9 @@
             </td>
             <td>
                 <img src="~/Files/@i.ExtencionName" width="300" height="200" alt="@i.Name">
+            </td>
+            <td>
+                @i.Status
             </td>
             <td>
                 <a href="~/Buyer/BuyersForCar/@i.Id">Покупатели</a>

@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Init\IMyContextInitialization.cs" />
     <Compile Include="Models\RepoBrands.cs" />
     <Compile Include="Models\RepoBuyCar.cs" />
     <Compile Include="Models\RepoBuyer.cs" />

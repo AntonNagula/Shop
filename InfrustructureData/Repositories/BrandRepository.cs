@@ -31,13 +31,18 @@ namespace InfrustructureData.Repositories
             Brands brand = db.Brands.Find(id);
             db.Brands.Remove(brand);
             db.SaveChanges();
-        }
+        }        
 
         public RepoBrands Get(int id)
         {
-            RepoBrands obj = db.Brands.Find(id).FromBrandsToRepoBrands();
-
-            return db.Brands.Find(id).FromBrandsToRepoBrands();
+            if (id != 0)
+            {
+                return db.Brands.Find(id).FromBrandsToRepoBrands();
+            }
+            else
+            {
+                return db.Brands.Last().FromBrandsToRepoBrands();
+            }
         }
 
         public IEnumerable<RepoBrands> GetAll()
@@ -46,6 +51,11 @@ namespace InfrustructureData.Repositories
         }
 
         public void Update(RepoBrands item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteRange()
         {
             throw new NotImplementedException();
         }

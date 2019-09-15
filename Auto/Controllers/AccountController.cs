@@ -97,7 +97,7 @@ namespace Auto.Controllers
         [HttpGet]
         public ActionResult Delete()
         {
-            List<ApplicationUser> Users = UserManager.Users.ToList();
+            List<ApplicationUser> Users = UserManager.Users.Where(x=>x.Email!= HttpContext.User.Identity.Name).ToList();
             return View(Users);
         }
 

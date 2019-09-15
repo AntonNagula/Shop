@@ -11,9 +11,10 @@
     <div class="present">
         <h1>@Model.Name</h1>
         <h3>Цена: @Model.Price</h3>
-        <hr />
-        <a class="links" href="~/Admin/Update/@Model.Id">Редактировать</a>        
-        <a class="links" href="~/Admin/Delete/@Model.Id">Снять с продаж</a>       
+        <hr />        
+        <form method="post" action="/Admin/DeleteCar/@Model.Id">
+            <input type="submit" value="Снять с продаж" />
+        </form>               
         <a class="links" href="~/Admin/ShowUsers_of_Car/@Model.Id">Показать покупателей</a>        
         <hr />
         <p><img src="~/Files/@Model.ExtencionName" width="600" height="400" alt="@Model.Name"></p>

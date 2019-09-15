@@ -81,8 +81,9 @@ namespace Auto.Controllers
         [HttpPost]
         public ActionResult DeleteCar(int id)
         {
-            unit.Delete_Car(id);
-            return View();
+            unit.AdminDelete(id);
+            var car = unit.GetCar(id).FromDomainCarToRepoCar();
+            return View(car);
         }
         
         [HttpGet]
@@ -96,6 +97,21 @@ namespace Auto.Controllers
         {
             unit.CreateBrand(brand);
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult DeleteCars(int i=0)
+        {            
+            List<AppCar> Cars = unit.GetAllCars().Select(x => x.FromDomainCarToRepoCar()).ToList();
+            return View(Cars);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteCars()
+        {
+            unit.DeleteRangeCars();
+            List<AppCar> Cars = unit.GetAllCars().Select(x => x.FromDomainCarToRepoCar()).ToList();
+            return View(Cars);
         }
     }
 }

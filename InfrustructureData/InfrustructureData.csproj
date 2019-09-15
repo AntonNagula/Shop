@@ -131,8 +131,6 @@
     <Compile Include="DataModels\Car.cs" />
     <Compile Include="Data\AutoContext.cs" />
     <Compile Include="Data\UnitOfWork.cs" />
-    <Compile Include="Initialization\IProvider.cs" />
-    <Compile Include="Initialization\Provider.cs" />
     <Compile Include="Mappers\Convert.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BrandRepository.cs" />

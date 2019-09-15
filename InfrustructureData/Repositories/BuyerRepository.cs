@@ -27,14 +27,15 @@ namespace InfrustructureData.Repositories
         public void Delete(int id)
         {
             Buyer buyer = db.Buyers.Find(id);
-            db.Buyers.Remove(buyer);
+            List<BuyCar> b= db.BuyCars.Where(x=>x.BuyerId==id).ToList();
+            if(b!=null)
+                db.BuyCars.RemoveRange(b);
+            db.Buyers.Remove(buyer);            
             db.SaveChanges();
-        }
+        }       
 
         public RepoBuyer Get(int id)
-        {
-            RepoBuyer obj = db.Buyers.Find(id).FromBuyerToRepoBuyer();
-           
+        {            
             return db.Buyers.Find(id).FromBuyerToRepoBuyer();
         }
 
@@ -44,6 +45,11 @@ namespace InfrustructureData.Repositories
         }
 
         public void Update(RepoBuyer item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteRange()
         {
             throw new NotImplementedException();
         }

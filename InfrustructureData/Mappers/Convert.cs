@@ -75,8 +75,6 @@ namespace InfrustructureData.Mappers
             return new BuyCar
             {
                 BuyerId = item.BuyerId,
-                Buyer = item.Buyer.FromRepoBuyerToBuyer(),
-                Car = item.Car.FromRepoCarToCar(),
                 CarId = item.CarId
             };
         }

@@ -47,15 +47,15 @@ namespace DomainService.Service
             List<DomainCar> result = Cars.Skip((i - 1) * size).Take(size).ToList();
             return result;
         }
-
+        //
         //
         public IEnumerable<DomainCar> GetAllCars(int i, int size, string brand,out int Total)
         {
             List<DomainCar> currentcars;
             if (brand != "Все")
-                currentcars = Cars.Where(x => x.CarBrand == brand).ToList();
+                currentcars = Cars.Where(x => x.CarBrand == brand && x.Status== "Продается").ToList();
             else
-                currentcars = Cars;
+                currentcars = Cars.Where(x=>x.Status== "Продается").ToList();
             Total = currentcars.Count;
             if (Total < size)
                 size = Total;
@@ -84,7 +84,7 @@ namespace DomainService.Service
             }
             return domainCars;
         }
-
+        //
         //
         public IEnumerable<DomainCar> GetCarsByOwnerId(int id)
         {            
@@ -98,32 +98,30 @@ namespace DomainService.Service
             return Cars.FirstOrDefault(x=>x.Id==id);
         }
         //
+        //
         public void Create_Car(DomainCar item)
         {
             if (item.BrandId == 0)
-            {
-                int size = 1 + GetAllBrands().ToList().Count;
-                item.BrandId = size;
-                DomainBrands brand = new DomainBrands { BrandName = item.CarBrand };
-                Brands.Add(brand);
+            {                
+                DomainBrands brand = new DomainBrands { BrandName = item.CarBrand };                
                 _Repositories.Brands.Create(brand.FromDomainBrandToRepoBrand());
+                Brands.Add(_Repositories.Brands.Get(0).FromRepoBrandToDomainBrand());
+                item.BrandId = Brands.Last().Id;
             }
             else
             {
                 item.CarBrand = Brands.FirstOrDefault(x => x.Id == item.BrandId).BrandName;
-            }
-            Cars.Add(item);
+            }           
+           
             _Repositories.Cars.Create(item.FromDomainCarToRepoCar());
+            Cars.Add(_Repositories.Cars.Get(0).FromRepoCarToDomainCar());
         }
-
+        
 
         public void Update_Car(DomainCar item)
         {
             if (item.BrandId == 0)
-            {
-                //int size = Brands.Count;
-                //int BrandId = Brands[size - 1].Id;
-                //item.BrandId = BrandId+1;
+            {                
                 int BrandId = Brands.Find(x=>x.BrandName==item.CarBrand).Id;
                 item.BrandId = BrandId;
             }
@@ -133,24 +131,33 @@ namespace DomainService.Service
             Cars[index] = item;
         }
         public void Delete_Car(int id)
-        {
-            //List<DomainBuyCar> list = _Repositories.BuyCars.GetById(id).Select(x=>x.FromRepoBuyCarToDomainBuyCar()).ToList();
-            //if (list.Count == 0)
-            //    _Repositories.Cars.Delete(id);
-            //else
-            //{
-            //    DomainCar car = _Repositories.Cars.Get(id).FromRepoCarToDomainCar();                     
-            //    _Repositories.Cars.Update(car.FromDomainCarToRepoCar());
-            //}
-
+        {           
             DomainCar car=Cars.Find(x=>x.Id==id);
-            Cars.Remove(car);
-            _Repositories.Cars.Delete(id);
+            int i = Cars.IndexOf(car);
+            car.Status = "Больше не продается";
+            car.OwnerId = null;
+            Cars[i] = car;            
+            _Repositories.Cars.Update(car.FromDomainCarToRepoCar());
         }
 
+        public void AdminDelete(int id)
+        {
+            DomainCar car = Cars.Find(x => x.Id == id);
+            int i = Cars.IndexOf(car);
+            car.Status = "Запрет админа";
+            Cars[i] = car;
+            _Repositories.Cars.Update(car.FromDomainCarToRepoCar());
+        }
 
-
-
+        public void DeleteRangeCars()
+        {
+            _Repositories.Cars.DeleteRange();
+            Cars.Clear();
+            Cars = _Repositories.Cars.GetAll().Select(x=>x.FromRepoCarToDomainCar()).ToList();
+            BuyCars.Clear();
+            BuyCars = _Repositories.BuyCars.GetAll().Select(x => x.FromRepoBuyCarToDomainBuyCar()).ToList();
+        }
+                
         //
         public bool Buy(DomainBuyCar item)
         {          
@@ -159,16 +166,16 @@ namespace DomainService.Service
             item.Buyer = Buyers.FirstOrDefault(x=>x.Id==item.BuyerId);
             DomainBuyCar obj = BuyCars.FirstOrDefault(x=>x.CarId==item.CarId && x.BuyerId==item.BuyerId);
             if (obj==null)
-            {
-                BuyCars.Add(item);
+            {                
                 _Repositories.BuyCars.Create(item.FromDomainBuyCarToRepoBuyCar());
+                BuyCars.Add(item);
                 return true;
             }
 
             return false;
         }
 
-
+        
 
 
         //
@@ -190,7 +197,7 @@ namespace DomainService.Service
             }
             return domainBuyers;
         }
-
+        
         //
         public DomainBuyer GetBuyer(int id)
         {
@@ -212,7 +219,7 @@ namespace DomainService.Service
             }
             return model;
         }
-
+        
         //
         public void Create_Buyer(DomainBuyer item)
         {
@@ -235,14 +242,30 @@ namespace DomainService.Service
 
         public void Delete_BuyerByEmail(string mail)
         {
-            DomainBuyer buyer= Buyers.Find(x => x.Email == mail);
+            DomainBuyer buyer= Buyers.Find(x => x.Email == mail);           
             int i = buyer.Id;
             if (buyer != null)
             {
                 _Repositories.Buyers.Delete(buyer.Id);
                 Buyers.Remove(buyer);
             }
-            Cars.RemoveAll(x=>x.OwnerId==i);
+            List<DomainCar> cars= Cars.Where(x=>x.OwnerId==i).ToList();
+            for(int count=0;count<cars.Count;count++)
+            {
+                int index=Cars.IndexOf(cars[count]);
+                cars[count].Status = "Продавец был удален админом";
+                cars[count].OwnerId = null;
+                Cars[index] = cars[count];
+                _Repositories.Cars.Update(cars[count].FromDomainCarToRepoCar());
+            }
+        }
+        
+        //
+        public void Delete_Purchase(int Id,int BuyerId)
+        {
+            DomainBuyCar buyCar = BuyCars.FirstOrDefault(x=>x.CarId==Id && x.BuyerId==BuyerId);
+            _Repositories.BuyCars.Delete(buyCar.FromDomainBuyCarToRepoBuyCar());
+            BuyCars.Remove(buyCar);
         }
     }
 }

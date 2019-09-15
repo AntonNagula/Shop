@@ -6,6 +6,7 @@ using InfrustructureData.Data;
 using InfrustructureData.Mappers;
 using Microsoft.EntityFrameworkCore;
 using InfrustructureData.DataModels;
+using System;
 
 namespace InfrustructureData.Repositories
 {
@@ -30,9 +31,25 @@ namespace InfrustructureData.Repositories
             db.SaveChanges();            
         }
 
+        public void DeleteRange()
+        {
+            List<BuyCar> buycars= db.BuyCars.Include(x => x.Car).Where(x => x.Car.OwnerId == null || x.Car.Status == "Запрет админа").ToList();
+            db.BuyCars.RemoveRange(buycars);
+            db.SaveChanges();
+            List<Car> cars=db.Cars.Where(x=>x.OwnerId== null || x.Status == "Запрет админа").ToList();
+            db.Cars.RemoveRange(cars);
+            db.SaveChanges();
+        }
         public RepoCar Get(int id)
-        {            
-            return db.Cars.Find(id).FromCarToRepoCar();
+        {
+            if (id != 0)
+            {
+                return db.Cars.Find(id).FromCarToRepoCar();
+            }
+            else
+            {
+                return db.Cars.Last().FromCarToRepoCar();
+            }
         }
 
         public IEnumerable<RepoCar> GetAll()
@@ -47,7 +64,9 @@ namespace InfrustructureData.Repositories
             car.Name = item.Name;
             car.Price = item.Price;
             car.Info = item.Info;
+            car.Status = item.Status;
             car.ExtencionName = item.ExtencionName;
+            car.OwnerId = item.OwnerId;
             db.Entry(car).State = EntityState.Modified;
             db.SaveChanges();
         }

@@ -79,6 +79,11 @@ namespace Auto.Controllers
         {
             if (upload != null)
             {
+                if(ViewCar.Id==0 && ViewCar.CarBrand=="")
+                {
+                    ViewBag.Message = "Вы не указали бренд";
+                    return View("~/Views/Buyer/Buy.cshtml");
+                }
                 string fileName = Path.GetFileName(upload.FileName);
                 string ext = Path.GetExtension(fileName);
                 string ExtencionName = ViewCar.Name + ext;
@@ -88,6 +93,7 @@ namespace Auto.Controllers
                 DomainCar car = new DomainCar(ViewCar.Name, ViewCar.CarBrand,ViewCar.BrandId, ViewCar.Price, ExtencionName, ViewCar.Info,avatar);
                 string mail = HttpContext.User.Identity.Name;
                 car.OwnerId = unit.GetBuyer(mail).Id;
+                car.Status = "Продается";
                 unit.Create_Car(car);
             }
             ViewBag.Message = "Авто занесено в базу данных";
@@ -152,8 +158,7 @@ namespace Auto.Controllers
 
         [HttpGet]
         public ActionResult DeleteCar(int Id)
-        {
-            //List<AppBuyer> buyers = unit.GetBuyersByCarId(Id).Select(x => x.FromDomainBuyerToRepoBuyer()).ToList();
+        {            
             unit.Delete_Car(Id);
             ViewBag.Message = "Удаление прошло успешно";
             return View("~/Views/Buyer/Buy.cshtml");
@@ -179,11 +184,11 @@ namespace Auto.Controllers
             SmtpClient smtp = new SmtpClient("smtp.mail.ru", 25);
             if (type_mail == "gmail")
             {
-                smtp = new SmtpClient("smtp."+type_mail+".com", 587);
+                smtp = new SmtpClient("smtp." + type_mail + ".com", 587);
             }
             else
             {
-                smtp = new SmtpClient("smtp."+type_mail+".ru", 25);
+                smtp = new SmtpClient("smtp." + type_mail + ".ru", 25);
             }
             smtp.UseDefaultCredentials = false;
             smtp.Credentials = new NetworkCredential(model.From, model.password);
@@ -191,6 +196,16 @@ namespace Auto.Controllers
             smtp.Send(m);
             ViewBag.Message = "Сообщение отправлено";
             return View("Buy");
+        }
+
+        [HttpPost]
+        public ActionResult DeletePurch(int Id)
+        {            
+            int BuyerId = unit.GetBuyer(User.Identity.Name).Id;
+            unit.Delete_Purchase(Id,BuyerId);
+                        
+            List<AppCar> Cars = unit.GetCarsBuyerId(BuyerId).Select(x => x.FromDomainCarToRepoCar()).ToList();
+            return View(Cars);            
         }
     }
 }

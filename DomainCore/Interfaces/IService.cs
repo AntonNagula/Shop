@@ -18,7 +18,8 @@ namespace DomainCore.Interfaces
         void Create_Car(DomainCar item);
         void Update_Car(DomainCar item);
         void Delete_Car(int id);
-
+        void AdminDelete(int id);
+        void DeleteRangeCars();
         IEnumerable<DomainBuyer> GetAllBuyers();
         IEnumerable<DomainBuyer> GetBuyersByCarId(int id);
         DomainBuyer GetBuyer(int id);
@@ -30,6 +31,7 @@ namespace DomainCore.Interfaces
 
 
         bool Buy(DomainBuyCar item);
+        void Delete_Purchase(int Id,int BuyerId);
 
         void CreateBrand(string brandName);
         IEnumerable<DomainBrands> GetAllBrands();

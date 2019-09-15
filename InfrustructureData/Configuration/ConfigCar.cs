@@ -19,7 +19,7 @@ namespace InfrustructureData.Configuration
                 .HasOne(sc => sc.Owner)
                 .WithMany(s => s.Cars)
                 .HasForeignKey(sc => sc.OwnerId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

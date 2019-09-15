@@ -25,6 +25,7 @@ namespace DomainService.Mappers
                 image = item.image,
                 OwnerId = item.OwnerId,
                 BrandId = item.BrandId,
+                Status=item.Status,
                 // BuyCars = item.BuyCars.Select(x => x.FromRepoBuyCarToDomainBuyCar()).ToList(),
             };
         }
@@ -43,6 +44,7 @@ namespace DomainService.Mappers
                 image = item.image,
                 OwnerId = item.OwnerId,
                 BrandId = item.BrandId,
+                Status=item.Status
                 //BuyCars = item.BuyCars.Select(x => x.FromDomainBuyCarToRepoBuyCar()).ToList(),
             };
         }

@@ -273,6 +273,7 @@
     <Compile Include="ModelsApp\AppBuyer.cs" />
     <Compile Include="ModelsApp\AppCar.cs" />
     <Compile Include="ModelsApp\AppCarBrand.cs" />
+    <Compile Include="ModelsApp\BodyPost.cs" />
     <Compile Include="ModelsApp\BrandsListViewModel.cs" />
     <Compile Include="ModelsApp\DropList.cs" />
     <Compile Include="ModelsApp\EmailModel.cs" />
@@ -292,6 +293,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Style.css" />
+    <Content Include="Content\фотки\login-dark.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -366,9 +369,16 @@
     <Content Include="Views\Buyer\Connect.cshtml" />
     <Content Include="Views\Buyer\DeletePurch.cshtml" />
     <Content Include="Views\Admin\DeleteCars.cshtml" />
+    <Content Include="Views\Shared\Reg.cshtml" />
+    <Content Include="Views\Buyer\New.cshtml" />
+    <Content Include="Views\Shared\NewHead.cshtml" />
+    <Content Include="Views\Shared\NewAdmin.cshtml" />
+    <Content Include="Views\Shared\NewUser.cshtml" />
+    <Content Include="Views\Shared\ForCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\UI\" />
     <Folder Include="Files\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,63 +1,41 @@
 ﻿@using Auto.Models
 @model LoginViewModel
 @{
+    Layout = "~/Views/Shared/Reg.cshtml";
     ViewBag.Title = "Выполнить вход";
 }
+<!-- overlay -->
+    <div class="uk-position-cover uk-overlay-primary"></div>
+    <!-- /overlay -->
+    <div class="uk-width-medium uk-padding-small uk-position-z-index" id="start" uk-scrollspy="cls: uk-animation-fade">
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
+
+        <div>
+            <!-- login -->
+            <form class="toggle-class" action="/Account/Login" method="post">
                 @Html.AntiForgeryToken()
-                <h4>Используйте локальную учетную запись для входа.</h4>
-                <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-5">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-5">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                <fieldset class="uk-fieldset">
+                    <div class="uk-margin-small">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: user"></span>
+                            <input class="uk-input uk-border-pill" required placeholder="Username" name="Email" type="email">
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Выполнить вход" class="btn btn-default" />
+                    <div class="uk-margin-small">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: lock"></span>
+                            <input class="uk-input uk-border-pill" required placeholder="Password" name="Password" type="password">
+                        </div>
+                    </div>                    
+                    <div class="uk-margin-small">
+                        <label><input class="uk-checkbox" type="checkbox"> Keep me logged in</label>
                     </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Регистрация нового пользователя", "Register")
-                </p>
-                @* Включите, когда будет включено подтверждение учетной записи для функции сброса пароля
-                    <p>
-                        @Html.ActionLink("Забыли пароль?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
+                    <div class="uk-margin-bottom">
+                        <button type="submit" class="uk-button uk-button-primary uk-border-pill uk-width-1-1">LOG IN</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+        <!-- /login -->
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

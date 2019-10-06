@@ -1,10 +1,11 @@
 ﻿@model  IList<Auto.ModelsApp.AppCar>
 @{
     ViewBag.Title = "DeleteCars";
+    Layout = "~/Views/Shared/NewAdmin.cshtml";
 }
 
 <form method="post" action="/Admin/DeleteCars">
-    <input type="submit" value="Удалить неактуальное" />
+    <button class="btn btn-danger">Удалить неактуальное</button>
 </form>
 <table class="table">
     <tr>

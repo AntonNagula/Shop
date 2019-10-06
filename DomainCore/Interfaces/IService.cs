@@ -12,6 +12,7 @@ namespace DomainCore.Interfaces
         IEnumerable<DomainCar> GetAllCars();
         IEnumerable<DomainCar> GetAllCars(int i,int size,out int Total);
         IEnumerable<DomainCar> GetAllCars(int i, int size, string brand,out int Total);
+        IEnumerable<DomainCar> Annociment(int i, int size, string brand, out int Total, int IdBuyer, int? minPrise, int? maxPrice);
         IEnumerable<DomainCar> GetCarsBuyerId(int id);
         IEnumerable<DomainCar> GetCarsByOwnerId(int id);
         DomainCar GetCar(int id);

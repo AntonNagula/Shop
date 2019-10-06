@@ -1,41 +1,50 @@
 ﻿@model Auto.Models.RegisterViewModel
 @{
+    Layout = "~/Views/Shared/Reg.cshtml";
     ViewBag.Title = "Регистрация";
 }
+    <!-- overlay -->
+    <div class="uk-position-cover uk-overlay-primary"></div>
+    <!-- /overlay -->
+    
+    <div class="uk-width-medium uk-padding-small uk-position-z-index" id="start" uk-scrollspy="cls: uk-animation-fade">
 
-<h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Создайте новую учетную запись.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        <div>
+            <!-- login -->
+            <form class="toggle-class" action="/Account/Register" method="post">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <fieldset class="uk-fieldset">
+                    <div class="uk-margin-small">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: user"></span>
+                            <input class="uk-input uk-border-pill" required placeholder="Username" name="Email" type="email">
+                        </div>
+                    </div>
+                    <div class="uk-margin-small">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: lock"></span>
+                            <input class="uk-input uk-border-pill" required placeholder="Password" name="Password" type="password">
+                        </div>
+                    </div>
+                    <div class="uk-margin-small">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: lock"></span>
+                            <input class="uk-input uk-border-pill" required placeholder="Confirm Password" name="ConfirmPassword" type="password">
+                        </div>
+                    </div>
+                    <div class="uk-margin-small">
+                        <div class="uk-inline uk-width-1-1">
+                            <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: lock"></span>
+                            <input class="uk-input uk-border-pill" required placeholder="Пример телефона:375*********" name="PhoneNumber" type="text">
+                        </div>
+                    </div>
+                    <div class="uk-margin-bottom">
+                        <button type="submit" class="uk-button uk-button-primary uk-border-pill uk-width-1-1">Registration</button>
+                    </div>
+                </fieldset>
+            </form>
         </div>
+        <!-- /login -->
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Регистрация" />
-        </div>
-    </div>
-}
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

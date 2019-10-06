@@ -62,6 +62,20 @@ namespace Auto.Models
         public bool RememberMe { get; set; }
     }
 
+    public class EnterModel
+    {
+        [Required]
+        [Display(Name = "Адрес электронной почты")]
+        [EmailAddress]
+        public string Email { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Пароль")]
+        public string Password { get; set; }
+
+    }
+
     public class RegisterViewModel
     {
         [Required]
@@ -79,6 +93,10 @@ namespace Auto.Models
         [Display(Name = "Подтверждение пароля")]
         [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
         public string ConfirmPassword { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Номер телефона")]        
+        public string PhoneNumber { get; set; }
     }
 
     public class ResetPasswordViewModel

@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Buttons - Atlantis Lite Bootstrap 4 Admin Dashboard</title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <link rel="icon" href="../../Content/UI/assets/img/icon.ico" type="image/x-icon" />
+    <!-- Fonts and icons -->
+    <script src="../../Content/UI/assets/js/plugin/webfont/webfont.min.js"></script>
+    <script>
+        WebFont.load({
+            google: { "families": ["Lato:300,400,700,900"] },
+            custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['../../Content/UI/assets/css/fonts.min.css'] },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../../Content/UI/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../Content/UI/assets/css/atlantis.min.css">
+    <link rel="stylesheet" href="../../Content/Style.css" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link rel="stylesheet" href="../../Content/UI/assets/css/demo.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="main-header">
+            <!-- Logo Header -->
+            <div class="logo-header" data-background-color="blue">
+                                
+            </div>
+            <!-- End Logo Header -->
+            <!-- Navbar Header -->
+            <nav class="navbar navbar-header navbar-expand-lg" data-background-color="blue2">
+
+                <div class="container-fluid">
+                    <div class="collapse" id="search-nav">
+                        <form class="navbar-left navbar-form nav-search mr-md-3">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button type="submit" class="btn btn-search pr-1">
+                                        <i class="fa fa-search search-icon"></i>
+                                    </button>
+                                </div>
+                                <input type="text" placeholder="Search ..." class="form-control">
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+            </nav>
+            <!-- End Navbar -->
+        </div>
+        <!-- Sidebar -->
+        <div class="sidebar sidebar-style-2">
+
+            <div class="sidebar-wrapper scrollbar scrollbar-inner">
+                <div class="sidebar-content">
+                    
+                    <ul class="nav nav-primary">
+
+                        <li class="nav-section">
+                            <span class="sidebar-mini-icon">
+                                <i class="fa fa-ellipsis-h"></i>
+                            </span>
+                            <h4 class="text-section">Components</h4>
+                        </li>
+                        <li class="nav-item active submenu">
+
+                            <div class="collapse show" id="base">
+                                <ul class="nav nav-collapse">
+                                    <li>
+                                        <form method="get" action="/Home/Index">
+                                            <button class="btn btn-light">Главная</button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <form method="get" action="/Home/Contact">
+                                            <button class="btn btn-light">Контакты</button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <form method="get" action="/Account/Register">
+                                            <button class="btn btn-light">Регистрация</button>
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <form method="get" action="/Account/Login">
+                                            <button class="btn btn-light">Войти</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="main-panel">
+            <div class="content">
+                <div class="container">
+                    @RenderBody()
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!--   Core JS Files   -->
+    <script src="../../Content/UI/assets/js/core/jquery.3.2.1.min.js"></script>
+    <script src="../../Content/UI/assets/js/core/popper.min.js"></script>
+    <script src="../../Content/UI/assets/js/core/bootstrap.min.js"></script>
+    <!-- jQuery UI -->
+    <script src="../../Content/UI/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="../../Content/UI/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="../../Content/UI/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <!-- Atlantis JS -->
+    <script src="../../Content/UI/assets/js/atlantis.min.js"></script>
+    <!-- Atlantis DEMO methods, don't include it in your project! -->
+    <script src="../../Content/UI/assets/js/setting-demo2.js"></script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 ﻿@model List<Auto.Models.ApplicationUser>
 @{
     ViewBag.Title = "Delete";
-    Layout = "~/Views/Shared/Head.cshtml";
+    Layout = "~/Views/Shared/NewAdmin.cshtml";
 }
 
 <h2>Пользователи</h2>
@@ -20,7 +20,7 @@
                     </td>
                     <td>
                         <form method="post" action="/Account/Delete/@user.Id">
-                            <input type="submit" value="удалить" />
+                            <button class="btn btn-danger" >Удалить</button>
                         </form>
                     </td>
                 </tr>

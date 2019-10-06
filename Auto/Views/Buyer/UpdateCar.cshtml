@@ -1,14 +1,9 @@
 ﻿@model Auto.ModelsApp.UpdateCar
 @{
-    Layout = "~/Views/Shared/User.cshtml";
+    Layout = "~/Views/Shared/ForCreate.cshtml";
     ViewBag.Title = "Обновить";
 }
-<html>
-<head>
-    <link type="text/css" rel="stylesheet" href="~/Content/Site.css" />
-</head>
-<body>
-    <div id="start">
+<div id="start">
         <h4>  Выберите файл для загрузки</h4>
         @using (Html.BeginForm("UpdateCar", "Buyer", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
@@ -18,14 +13,12 @@
             <input type="hidden" value="@Model.Car.Id" name="Id" />
             <input class="enter" type="file" name="upload" /><br>
             <label for="1">Название модели</label>
-            <input id="1" class="enter" type="text" required="required" name="Name" value="@Model.Car.Name" /><br>
+            <input id="1" style="width:300px;"  class="form-control input-fixed" type="text" required="required" name="Name" value="@Model.Car.Name" /><br>
             <label for="2">Бренд</label>
-            <input id="2" class="enter" type="text" required="required" name="CarBrand" value="@Model.Car.CarBrand" /><br>
+            <input id="2" style="width:300px;"  class="form-control input-fixed" type="text" required="required" name="CarBrand" value="@Model.Car.CarBrand" /><br>
             <label for="4">Цена</label>
-            <input id="4" class="enter" type="text" required="required" name="Price" value="@Model.Car.Price" /><br>
-            <textarea name="Info" required="required" value="@Model.Car.Info"></textarea>
-            <input class="enter" type="submit" value="Загрузить" />
+            <input id="4" style="width:300px;"  class="form-control input-fixed" type="text" required="required" name="Price" value="@Model.Car.Price" /><br>
+            <textarea  class="enter"  name="Info" required="required" value="@Model.Car.Info"></textarea>
+            <button style="margin-left:35%" class="btn btn-success">Загрузить</button>
         }
-    </div>
-</body>
-</html>
+</div>

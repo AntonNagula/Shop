@@ -36,7 +36,7 @@ textarea {
     height: 300px;
     max-width: 60%;
     margin-top: 15%;
-    margin-left: 25%;
+    margin-left: 35%;
 }
 
 #create {
@@ -47,7 +47,7 @@ textarea {
     margin-left: 10%;
 }
 
-#Pass {
+#Login {
     width: 60%;
     margin-top: 10%;
     margin-left: 25%;
@@ -66,9 +66,9 @@ textarea {
 
 input.enter {
     margin-top: 5px;
-    margin-left: 10px;
     margin-bottom: 10px;
     width: 300px;
+    border-radius:5px;
 }
 
 textarea.enter {
@@ -82,13 +82,89 @@ textarea.enter {
     height: 100%;
 }
 
-#Password input {
+#Login input {
     color: black;
+}
+
+#Login p {
+    color: aqua;
+    width:300px;
+}
+
+#center {
+    margin-left: 50%;
+}
+
+
+
+
+
+
+
+#create {
+    width: 300px;
+    height: 300px;
+    max-width: 60%;
+    margin-top: 15%;
+    margin-left: 10%;
+}
+
+.register {
+    width: 60%;
+    margin-top: 10%;
+    margin-left: 25%;
+    margin-bottom: 10%;
+    font-size: 20px;
+}
+
+#User {
+    width: 300px;
+    margin-top: 5%;
+    margin-left: 13%;
+    margin-bottom: 10%;
+    font-size: 20px;
+    font-weight: 20px;
+}
+
+input.enter {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    width: 300px;
+    border-radius: 5px;
+}
+
+textarea.enter {
+    margin-left: 10px;
+    width: 600px;
+    height: 300px;
+}
+
+#back {
+    width: 100%;
+    height: 100%;
+}
+
+#Login input {
+    color: black;
+}
+
+#Login p {
+    color: aqua;
+    width: 300px;
 }
 
 #center {
     margin-left: 40%;
 }
+
+
+
+
+
+
+
+
+
 
 a {
     text-decoration: none;
@@ -113,7 +189,7 @@ a {
 
 
 .background {
-    background: url('фотки/Создать.jpg');
+    background: url('фотки/NY.jpg');
 }
 
 
@@ -158,3 +234,9 @@ td {
     th:first-child, td:first-child {
         text-align: left;
     }
+
+textarea.enter {
+    margin-left: 10px;
+    width: 300px;
+    height: 300px;
+}

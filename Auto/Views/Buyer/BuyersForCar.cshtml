@@ -1,13 +1,8 @@
 ﻿@model List<Auto.ModelsApp.AppBuyer>
 @{
-    Layout = "~/Views/Shared/User.cshtml";
+    Layout = "~/Views/Shared/NewHead.cshtml";
     ViewBag.Title = "BuyersForCar";
-}
-<html>
-<head>
-    <link type="text/css" rel="stylesheet" href="~/Content/Site.css" />
-</head>
-<body>    
+} 
     <table class="table">
         <tr>
 
@@ -19,17 +14,14 @@
             {
             <tr>
                 <td>
-                    <a href="/Admin/ShowCars_of_User/@i.Id">@Html.DisplayFor(modelItem => i.Email)</a>
+                    @Html.DisplayFor(modelItem => i.Email)
                 </td>
                 <td>
                     <form method="get" action="/Buyer/Connect/@i.Id">
-                        <input type="submit" value="Связаться" />
+                        <button class="btn btn-primary">Связаться</button>
                     </form>
                 </td>
             </tr>
             }
         }
     </table>
-
-</body>
-</html>

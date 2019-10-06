@@ -1,13 +1,13 @@
 ﻿@model  IList<Auto.ModelsApp.AppCar>
 @{
-    Layout = "~/Views/Shared/User.cshtml";
+    Layout = "~/Views/Shared/NewHead.cshtml";
     ViewBag.Title = "Корзина";
 }
-<html>
+@*<html>
 <head>
     <link type="text/css" rel="stylesheet" href="~/Content/Site.css" />
 </head>
-<body>
+<body>*@
 
     <table class="table">
         <tr>
@@ -36,7 +36,7 @@
             </td>
             <td>
                 <form method="post" action="/Buyer/DeletePurch/@i.Id">
-                    <input type="submit" value="Убрать из избранного" />
+                   <button class="btn btn-primary">Убрать из избранного</button>
                 </form>                
             </td>
         </tr>
@@ -44,5 +44,5 @@
         }
     </table>
 
-</body>
-</html>
+@*</body>
+</html>*@

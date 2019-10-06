@@ -1,13 +1,13 @@
 ﻿@model  IList<Auto.ModelsApp.AppCar>
 @{
-    Layout = "~/Views/Shared/User.cshtml";
+    Layout = "~/Views/Shared/NewHead.cshtml";
     ViewBag.Title = "Машины покупателя";
 }
-<html>
+@*<html>
 <head>
     <link type="text/css" rel="stylesheet" href="~/Content/Site.css" />
 </head>
-<body>
+<body>*@
 
     <table class="table">
         <tr>
@@ -26,8 +26,7 @@
         <tr>
             <td>
                 <a href="#">@Html.DisplayFor(modelItem => i.Name)</a>
-            </td>
-            <td>
+                <br />
                 @Html.DisplayFor(modelItem => i.Price)$
             </td>
             <td>
@@ -37,18 +36,26 @@
                 @i.Status
             </td>
             <td>
-                <a href="~/Buyer/BuyersForCar/@i.Id">Покупатели</a>
+                <form method="get" action="/Buyer/BuyersForCar/@i.Id">
+                    <button class="btn btn-primary">Покупатели</button>
+                </form>
             </td>
             <td>
-                <a href="~/Buyer/UpdateCar/@i.Id">Редактирование</a>
+                <form method="get" action="/Buyer/UpdateCar/@i.Id">
+                    <button class="btn btn-primary">Редактирование</button>
+                </form>
+               
             </td>
             <td>
-                <a href="~/Buyer/DeleteCar/@i.Id">Удалить</a>
+                <form method="get" action="/Buyer/DeleteCar/@i.Id">
+                    <button class="btn btn-primary">Удалить</button>
+                </form>
+                
             </td>
         </tr>
             }
         }
     </table>
 
-</body>
-</html>
+@*</body>
+</html>*@

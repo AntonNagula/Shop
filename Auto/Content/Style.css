@@ -1,0 +1,65 @@
+﻿#cars {
+    margin-top: 20px;
+}
+
+#center{
+    margin-left:40%;
+}
+
+#start {
+    width: 300px;
+    height: 300px;
+    max-width: 60%;
+    margin-top: 15%;
+    margin-left: 35%;
+}
+
+input.enter {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    width: 300px;
+    border-radius: 5px;
+}
+
+textarea.enter {
+    margin-left: 10px;
+    width: 300px;
+    height: 300px;
+}
+
+
+/*таблицы*/
+.table {
+    margin-right: 10%;
+}
+
+table {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th {
+    background: #AFCDE7;
+    color: white;
+    padding: 10px 20px;
+}
+
+th, td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
+    width: 40px;
+    height: 20px;
+}
+
+td {
+    background: #D8E6F3;
+}
+
+    th:first-child, td:first-child {
+        text-align: left;
+    }
+
+

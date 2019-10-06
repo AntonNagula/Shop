@@ -1,8 +1,8 @@
 ﻿using Auto.Mappers;
+using Auto.Models;
 using Auto.ModelsApp;
 using DomainCore.Interfaces;
 using DomainCore.Models;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,12 +23,19 @@ namespace Auto.Controllers
             unit=Unit;
         }
 
-        public ActionResult Index(int i = 1,string brand="Все")
+        public ActionResult New()
+        {
+            return View();
+        }
+        public ActionResult Index(int i = 1,string brand="Все",string minPrise=null,string maxPrice=null)
         {
             int Total, size = 6;
-            List<AppCar> b = unit.GetAllCars(i, size,brand, out Total).Select(x => x.FromDomainCarToRepoCar()).ToList();
+            int min=minPrise==null ? 0 : int.Parse(minPrise), max=maxPrice==null ? 0 : int.Parse(maxPrice);
+            string mail = HttpContext.User.Identity.Name;
+            int IdBuyer= unit.GetBuyer(mail).Id;
+            List<AppCar> b = unit.Annociment(i, size,brand, out Total,IdBuyer, min, max).Select(x => x.FromDomainCarToRepoCar()).ToList();
             PageInfo page = new PageInfo { PageSize = size, PageNumber = i, TotalItems = Total };
-            IndexViewModel index = new IndexViewModel { PageInfo = page, Cars = b };
+            ModelsApp.IndexViewModel index = new ModelsApp.IndexViewModel { PageInfo = page, Cars = b };
             List<string> CarBrands = unit.GetAllBrands().Select(x => x.FromAppBrandToBrand()).ToList();
             CarBrands.Insert(0,"Все");
             BrandsListViewModel brands = new BrandsListViewModel { PageInfo = page, Cars = b, Brands = new SelectList(CarBrands) };
@@ -41,21 +48,25 @@ namespace Auto.Controllers
             return View(car);
         }
 
+        
         [HttpPost]
         public ActionResult Buy(int id)
         {
             string mail=HttpContext.User.Identity.Name;
             int buyerId = unit.GetBuyer(mail).Id;
-            if (buyerId == unit.GetCar(id).OwnerId)
-            {
-                ViewBag.Message = "Ты её продаешь дурачек)";
-                return View();
-            }
+            //if (buyerId == unit.GetCar(id).OwnerId)
+            //{
+            //    ViewBag.Message = "Ты её продаешь дурачек)";
+            //    return View();
+            //}
             AppBuyCar b = new AppBuyCar { BuyerId = buyerId, CarId = id };
             bool result=unit.Buy(b.FromAppCarToDomainBuyCar());
             string message;
             if (result == true)
+            {
                 message = "Благодарим за покупку";
+               
+            }
             else
                 message = "Вы уже отметили";
             ViewBag.Message = message;

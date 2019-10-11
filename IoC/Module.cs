@@ -26,7 +26,8 @@ namespace IoC
             Bind<PurchaseRepositories<RepoBuyCar>>().To<PurchaseRepository>().InSingletonScope();
             Bind<IUnitOfWork>().To<UnitOfWork>().InSingletonScope();
             Bind<IService>().To<Service>().InSingletonScope();
-            
+            Bind<IRepositories<RepoMessage>>().To<MessageRepository>().InSingletonScope();
+            Bind<IRepositories<RepoSpeach>>().To<SpeachRepository>().InSingletonScope();
         }
 
     }

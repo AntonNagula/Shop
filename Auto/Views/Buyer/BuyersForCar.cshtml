@@ -3,18 +3,26 @@
     Layout = "~/Views/Shared/NewHead.cshtml";
     ViewBag.Title = "BuyersForCar";
 } 
+
     <table class="table">
         <tr>
 
             <th>Почта</th>
+            <th>Чат</th>
             <th>Написать</th>
-        </tr>
+        </tr>        
         @if (Model!=null)
         { foreach (var i in Model)
             {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => i.Email)
+                </td>
+                <td>                    
+                    <form method="get" action="/Buyer/Speach/@i.Id">
+                        <input type="hidden" name="CarId" value="@ViewBag.CarId" />
+                        <button class="btn btn-success">Чат</button>
+                    </form>
                 </td>
                 <td>
                     <form method="get" action="/Buyer/Connect/@i.Id">

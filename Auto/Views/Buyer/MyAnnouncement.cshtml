@@ -36,6 +36,11 @@
                 @i.Status
             </td>
             <td>
+                <form method="get" action="/Buyer/AutoSpeach/@i.Id">
+                    <button class="btn btn-success">Чаты</button>
+                </form>
+            </td>
+            <td>
                 <form method="get" action="/Buyer/BuyersForCar/@i.Id">
                     <button class="btn btn-primary">Покупатели</button>
                 </form>
@@ -44,13 +49,13 @@
                 <form method="get" action="/Buyer/UpdateCar/@i.Id">
                     <button class="btn btn-primary">Редактирование</button>
                 </form>
-               
+
             </td>
             <td>
                 <form method="get" action="/Buyer/DeleteCar/@i.Id">
                     <button class="btn btn-primary">Удалить</button>
                 </form>
-                
+
             </td>
         </tr>
             }

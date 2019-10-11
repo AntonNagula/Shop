@@ -1,0 +1,39 @@
+﻿@model List<Auto.ModelsApp.AppSpeach>
+@{
+    Layout = "~/Views/Shared/NewHead.cshtml";
+    ViewBag.Title = "Speaches";
+}
+<div class="center">
+    <table class="table table-head-bg-primary mt-4">
+        <thead>
+            <tr>
+                <th>Имя Пользователя</th>
+                <th>Связь</th>
+                <th>Удалить</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model)
+            {
+                <tr>
+                    <td>@i.Name</td>
+                    <td>
+                        <form method="get" action="/Buyer/Speach">
+                            <input type="hidden" name="Id" value="@i.IdUser" />
+                            <input type="hidden" name="CarId" value="@i.IdCar" />
+                            <button class="btn btn-primary">Связаться</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="get" action="/Buyer/DelSpeach">
+                            <input type="hidden" name="IdSpeach" value="@i.Id" />
+                            <input type="hidden" name="AutoId" value="@i.IdCar" />
+                            <button class="btn btn-primary">Связаться</button>
+                        </form>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>

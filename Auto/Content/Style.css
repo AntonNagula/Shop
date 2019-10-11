@@ -1,9 +1,41 @@
-﻿#cars {
+﻿.button19 {
+    position: relative;
+    display: inline-block;
+    width: 6em;
+    height: 2.0em;
+    line-height: 2.0em;
+    vertical-align: middle;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    color: #000;
+    outline: none;
+    border: 1px solid rgba(110,121,128,.8);
+    border-top-color: rgba(0,0,0,.3);
+    border-radius: 5px;
+    background: rgb(206, 220, 231) linear-gradient(rgb(206,220,231), rgb(89,106,114));
+    box-shadow: 0 -1px rgba(10,21,28,.9) inset, 0 1px rgba(255,255,255,.5) inset;
+} 
+#cars {
     margin-top: 20px;
 }
+a.speach{
+    background-color:aquamarine;
+}
+a.speach:hover
+{
+    background-color:aqua;
+}
+#center {
+    margin-left: 40%;
+}
 
-#center{
-    margin-left:40%;
+.center {
+    margin-top:10px;
+    margin-left: 20%;
+    margin-right:20%;
+    height:auto;
+    background-color:white;
 }
 
 #start {

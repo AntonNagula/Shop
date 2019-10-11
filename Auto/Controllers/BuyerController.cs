@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -48,24 +49,18 @@ namespace Auto.Controllers
             return View(car);
         }
 
-        
         [HttpPost]
         public ActionResult Buy(int id)
         {
             string mail=HttpContext.User.Identity.Name;
             int buyerId = unit.GetBuyer(mail).Id;
-            //if (buyerId == unit.GetCar(id).OwnerId)
-            //{
-            //    ViewBag.Message = "Ты её продаешь дурачек)";
-            //    return View();
-            //}
             AppBuyCar b = new AppBuyCar { BuyerId = buyerId, CarId = id };
             bool result=unit.Buy(b.FromAppCarToDomainBuyCar());
             string message;
             if (result == true)
             {
                 message = "Благодарим за покупку";
-               
+               // await Task.Run(()=>unit.SendMassege(mail,id));
             }
             else
                 message = "Вы уже отметили";
@@ -123,6 +118,7 @@ namespace Auto.Controllers
         {
             string mail = HttpContext.User.Identity.Name;
             int id = unit.GetBuyer(mail).Id;
+            ViewBag.Id = id;
             List<AppCar> Cars = unit.GetCarsBuyerId(id).Select(x => x.FromDomainCarToRepoCar()).ToList();
             return View(Cars);
         }
@@ -130,6 +126,7 @@ namespace Auto.Controllers
         public ActionResult BuyersForCar(int Id)
         {
             List<AppBuyer> buyers=unit.GetBuyersByCarId(Id).Select(x => x.FromDomainBuyerToRepoBuyer()).ToList();
+            ViewBag.CarId = Id;
             return View(buyers);
         }
 
@@ -214,9 +211,54 @@ namespace Auto.Controllers
         {            
             int BuyerId = unit.GetBuyer(User.Identity.Name).Id;
             unit.Delete_Purchase(Id,BuyerId);
-                        
+            unit.RejectMessage(Id,BuyerId);
             List<AppCar> Cars = unit.GetCarsBuyerId(BuyerId).Select(x => x.FromDomainCarToRepoCar()).ToList();
             return View(Cars);            
+        }        
+
+        [HttpGet]
+        public ActionResult Speach(int Id, int CarId)
+        {
+            List<AppMessage> messages = unit.GetMessages(Id, CarId).Select(x => x.FromDomainMessageToAppMessage()).ToList();
+            return View(messages);
+        }
+
+        [HttpPost]
+        public ActionResult Speach(int SpeachId, string message)
+        {
+            unit.CreateMessage(SpeachId,HttpContext.User.Identity.Name,message);
+            List<AppMessage> messages = unit.GetMessages(SpeachId).Select(x => x.FromDomainMessageToAppMessage()).ToList();
+            return View(messages);
+        }
+        
+        [HttpGet]
+        public ActionResult OwnerSpeach(int OwnerId, int UserId, int CarId)
+        {
+            List<AppMessage> messages = unit.OwnerGetMessages(OwnerId, UserId, CarId).Select(x => x.FromDomainMessageToAppMessage()).ToList();
+            return View(messages);
+        }
+
+        [HttpPost]
+        public ActionResult OwnerSpeach(int SpeachId, string message)
+        {
+            unit.CreateMessage(SpeachId, HttpContext.User.Identity.Name, message);
+            List<AppMessage> messages = unit.GetMessages(SpeachId).Select(x => x.FromDomainMessageToAppMessage()).ToList();
+            return View(messages);
+        }
+        
+        [HttpGet]
+        public ActionResult AutoSpeach(int Id)
+        {
+            List<AppSpeach> speaches=unit.GetAutoSpeach(Id).Select(x=>x.FromDomainSpeachToSpeachSpeach()).ToList();
+            return View(speaches);
+        }
+
+        [HttpPost]
+        public ActionResult DelSpeach(int IdSpeach, int AutoId)
+        {
+            unit.DelSpeach(IdSpeach);
+            List<AppSpeach> speaches = unit.GetAutoSpeach(AutoId).Select(x => x.FromDomainSpeachToSpeachSpeach()).ToList();
+            return View(speaches);
         }
     }
 }

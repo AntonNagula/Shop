@@ -36,5 +36,18 @@ namespace DomainCore.Interfaces
 
         void CreateBrand(string brandName);
         IEnumerable<DomainBrands> GetAllBrands();
+
+        IEnumerable<DomainSpeach> GetAutoSpeach(int id);
+        IEnumerable<DomainSpeach> GetUserSpeach(int id);
+        IEnumerable<DomainMessage> GetMessages(int idUser,int AutoId);
+        IEnumerable<DomainMessage> GetRangeMessage(int id);
+        IEnumerable<DomainMessage> GetMessages(int idSpeach);
+        IEnumerable<DomainMessage> OwnerGetMessages(int OwnerId,int UserId, int AutoId);
+        void CreateSpeach(int AutoId, int UserId);
+        void CreateMessage(int idSpeach, string name, string messages);
+        void RejectMessage(int AutoId, int BuyerId);
+        void DelSpeach(int IdSpeach);
+        void SendMassege(string mail,int CarId);
+        
     }
 }

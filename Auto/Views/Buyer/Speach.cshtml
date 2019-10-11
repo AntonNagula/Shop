@@ -1,0 +1,17 @@
+﻿@model List<Auto.ModelsApp.AppMessage>
+@{
+    Layout = "~/Views/Shared/NewHead.cshtml";
+    ViewBag.Title = "BuyersForCar";
+}
+@{int SpeachId = Model.FirstOrDefault().SpeachId; }
+<div class="center">
+@foreach (var i in Model)
+{    
+    <p>@i.Name:@i.Text</p>
+}
+<form method="post" action="/Buyer/Speach">
+    <input type="hidden" name="SpeachId" value="@SpeachId"/>
+    <input type="text" name="message" />
+    <button>Отправить</button>
+</form>
+</div>

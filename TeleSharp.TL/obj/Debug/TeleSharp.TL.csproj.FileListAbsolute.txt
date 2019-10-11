@@ -1,0 +1,9 @@
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TeleSharp.TL\bin\Debug\TeleSharp.TL.dll
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TeleSharp.TL\bin\Debug\TeleSharp.TL.pdb
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TeleSharp.TL\bin\Debug\BigMath.dll
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TeleSharp.TL\bin\Debug\BigMath.xml
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TeleSharp.TL\obj\Debug\TeleSharp.TL.csprojAssemblyReference.cache
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TeleSharp.TL\obj\Debug\TeleSharp.TL.csproj.CoreCompileInputs.cache
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TeleSharp.TL\obj\Debug\TeleSharp.TL.csproj.CopyComplete
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TeleSharp.TL\obj\Debug\TeleSharp.TL.dll
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TeleSharp.TL\obj\Debug\TeleSharp.TL.pdb

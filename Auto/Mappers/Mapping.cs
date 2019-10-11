@@ -58,7 +58,7 @@ namespace Auto.Mappers
             {
                 Id = item.Id,
                 Email = item.Email,
-
+                Telephone = item.Telephone,
             };
         }
 
@@ -68,6 +68,7 @@ namespace Auto.Mappers
             {
                 Id = item.Id,
                 Email = item.Email,
+                Telephone=item.Telephone,
             };
         }
 
@@ -92,6 +93,57 @@ namespace Auto.Mappers
             {
                 Id = item.Id,
                 BrandName = item.BrandName,
+            };
+        }
+
+
+        public static DomainSpeach FromRepoSpeachToDomainSpeach(this AppSpeach item)
+        {
+            return new DomainSpeach
+            {
+                Id = item.Id,
+                IdCar = item.IdCar,
+                IdOwner=item.IdOwner,
+                IdUser = item.IdUser,
+                LastMes = item.LastMes,
+                Name = item.Name,
+            };
+        }
+
+        public static AppSpeach FromDomainSpeachToSpeachSpeach(this DomainSpeach item)
+        {
+            return new AppSpeach
+            {
+                Id = item.Id,
+                IdCar = item.IdCar,
+                IdOwner = item.IdOwner,
+                IdUser = item.IdUser,
+                LastMes = item.LastMes,
+                Name = item.Name,
+            };
+        }
+
+        public static DomainMessage FromAppMessageToDomainMessage(this AppMessage item)
+        {
+            return new DomainMessage
+            {
+                Id = item.Id,
+                IdUser = item.IdUser,
+                SpeachId = item.SpeachId,
+                Text = item.Text,
+                Name = item.Name,
+            };
+        }
+
+        public static AppMessage FromDomainMessageToAppMessage(this DomainMessage item)
+        {
+            return new AppMessage
+            {
+                Id = item.Id,
+                IdUser = item.IdUser,
+                SpeachId = item.SpeachId,
+                Text = item.Text,
+                 Name=item.Name,
             };
         }
     }

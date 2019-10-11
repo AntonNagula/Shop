@@ -9,6 +9,7 @@ namespace InfructructureDataInterfaces.Repositories
     public interface IRepositories<T> where T : class
     {
         IEnumerable<T> GetAll();
+        IEnumerable<T> GetRange(int id);
         T Get(int id);
         void Create(T item);
         void Update(T item);

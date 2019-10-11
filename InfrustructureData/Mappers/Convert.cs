@@ -81,5 +81,31 @@ namespace InfrustructureData.Mappers
             .ForMember(x => x.BuyCars, _ => _.Ignore()));
             return Mapper.Map<Buyer, RepoBuyer>(item);
         }
+
+        public static RepoSpeach FromSpeachToRepoSpeach(this Speach item)
+        {
+            Mapper.Initialize(cfg => cfg.CreateMap<Speach, RepoSpeach>());
+            return Mapper.Map<Speach, RepoSpeach>(item);
+        }
+
+        public static Speach FromRepoSpeachToSpeach(this RepoSpeach item)
+        {
+            Mapper.Initialize(cfg => cfg.CreateMap<RepoSpeach, Speach>()
+            .ForMember(x => x.Messages, _ => _.Ignore()));
+            return Mapper.Map<RepoSpeach, Speach>(item);
+        }
+
+        public static RepoMessage FromMessageToRepoMessage(this Message item)
+        {
+            Mapper.Initialize(cfg => cfg.CreateMap<Message, RepoMessage>());
+            return Mapper.Map<Message, RepoMessage>(item);
+        }
+
+        public static Message FromRepoMessageToMessage(this RepoMessage item)
+        {
+            Mapper.Initialize(cfg => cfg.CreateMap<RepoMessage, Message>()
+            .ForMember(x => x.Speach, _ => _.Ignore()));
+            return Mapper.Map<RepoMessage, Message>(item);
+        }
     }
 }

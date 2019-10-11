@@ -125,10 +125,14 @@
     <Compile Include="Configuration\ConfigBuyer.cs" />
     <Compile Include="Configuration\ConfigCar.cs" />
     <Compile Include="Configuration\ConfigManyToMany.cs" />
+    <Compile Include="Configuration\ConfigMessage.cs" />
+    <Compile Include="Configuration\ConfigSpeach.cs" />
     <Compile Include="DataModels\Brands.cs" />
     <Compile Include="DataModels\BuyCar.cs" />
     <Compile Include="DataModels\Buyer.cs" />
     <Compile Include="DataModels\Car.cs" />
+    <Compile Include="DataModels\Message.cs" />
+    <Compile Include="DataModels\Speach.cs" />
     <Compile Include="Data\AutoContext.cs" />
     <Compile Include="Data\UnitOfWork.cs" />
     <Compile Include="Mappers\Convert.cs" />
@@ -136,7 +140,9 @@
     <Compile Include="Repositories\BrandRepository.cs" />
     <Compile Include="Repositories\BuyerRepository.cs" />
     <Compile Include="Repositories\CarRepository.cs" />
+    <Compile Include="Repositories\MessageRepository.cs" />
     <Compile Include="Repositories\PurchaseRepository.cs" />
+    <Compile Include="Repositories\SpeachRepository.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

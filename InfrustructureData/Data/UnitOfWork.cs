@@ -16,11 +16,32 @@ namespace InfrustructureData.Data
         private BuyerRepository dbBuyers;
         private PurchaseRepository dbBuyCars;
         private BrandRepository dbBrands;
+        private SpeachRepository dbSpeaches;
+        private MessageRepository dbMessages;
         public UnitOfWork(AutoContext st)
         {
             db = st;
         }
 
+        public IRepositories<RepoMessage> Messages
+        {
+            get
+            {
+                if (dbMessages == null)
+                    dbMessages = new MessageRepository(db);
+                return dbMessages;
+            }
+        }
+
+        public IRepositories<RepoSpeach> Speaches
+        {
+            get
+            {
+                if (dbSpeaches == null)
+                    dbSpeaches = new SpeachRepository(db);
+                return dbSpeaches;
+            }
+        }
         public IRepositories<RepoBrands> Brands
         {
             get

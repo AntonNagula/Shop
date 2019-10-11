@@ -59,5 +59,10 @@ namespace InfrustructureData.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<RepoBrands> GetRange(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

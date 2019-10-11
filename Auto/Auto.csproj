@@ -273,6 +273,8 @@
     <Compile Include="ModelsApp\AppBuyer.cs" />
     <Compile Include="ModelsApp\AppCar.cs" />
     <Compile Include="ModelsApp\AppCarBrand.cs" />
+    <Compile Include="ModelsApp\AppMessage.cs" />
+    <Compile Include="ModelsApp\AppSpeach.cs" />
     <Compile Include="ModelsApp\BodyPost.cs" />
     <Compile Include="ModelsApp\BrandsListViewModel.cs" />
     <Compile Include="ModelsApp\DropList.cs" />
@@ -375,6 +377,10 @@
     <Content Include="Views\Shared\NewAdmin.cshtml" />
     <Content Include="Views\Shared\NewUser.cshtml" />
     <Content Include="Views\Shared\ForCreate.cshtml" />
+    <Content Include="Views\Buyer\Speach.cshtml" />
+    <Content Include="Views\Buyer\AutoSpeach.cshtml" />
+    <Content Include="Views\Buyer\OwnerSpeach.cshtml" />
+    <Content Include="Views\Buyer\DelSpeach.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

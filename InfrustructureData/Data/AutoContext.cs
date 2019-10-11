@@ -10,6 +10,8 @@ namespace InfrustructureData.Data
         public DbSet<Car> Cars { get; set; }
         public DbSet<BuyCar> BuyCars { get; set; }
         public DbSet<Brands> Brands { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Speach> Speaches { get; set; }
         public AutoContext(DbContextOptions<AutoContext> options) : base(options)
         {
             Database.EnsureCreated();
@@ -30,6 +32,8 @@ namespace InfrustructureData.Data
             modelBuilder.ApplyConfiguration(new ConfigCar());
             modelBuilder.ApplyConfiguration(new ConfigBuyer());
             modelBuilder.ApplyConfiguration(new ConfigBrand());
+            modelBuilder.ApplyConfiguration(new ConfigMessage());
+            modelBuilder.ApplyConfiguration(new ConfigSpeach());
 
             modelBuilder.Entity<Buyer>().HasData(
             new Buyer[]

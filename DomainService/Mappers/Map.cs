@@ -54,7 +54,7 @@ namespace DomainService.Mappers
             {
                 Id = item.Id,
                 Email = item.Email,
-
+                Telephone = item.Telephone,
             };
         }
 
@@ -64,7 +64,8 @@ namespace DomainService.Mappers
             return new RepoBuyer
             {
                 Id = item.Id,
-                Email = item.Email,                
+                Email = item.Email,
+                Telephone = item.Telephone,
             };
         }
 
@@ -105,6 +106,56 @@ namespace DomainService.Mappers
             return new RepoBrands
             {                
                 BrandName = item.BrandName,
+            };
+        }
+
+        public static DomainSpeach FromRepoSpeachToDomainSpeach(this RepoSpeach item)
+        {
+            return new DomainSpeach
+            {
+                Id = item.Id,
+                IdCar =item.IdCar,
+                IdOwner = item.IdOwner,
+                IdUser =item.IdUser,
+                LastMes=item.LastMes,
+                Name = item.Name,
+            };
+        }
+
+        public static RepoSpeach FromDomainSpeachToSpeachSpeach(this DomainSpeach item)
+        {
+            return new RepoSpeach
+            {
+                Id = item.Id,
+                IdCar = item.IdCar,
+                IdOwner = item.IdOwner,
+                IdUser = item.IdUser,
+                LastMes = item.LastMes,
+                Name = item.Name,
+            };
+        }
+
+        public static DomainMessage FromRepoMessageToDomainMessage(this RepoMessage item)
+        {
+            return new DomainMessage
+            {
+                Id = item.Id,
+                IdUser=item.IdUser,
+                SpeachId=item.SpeachId,
+                Text=item.Text,
+                Name = item.Name,
+            };
+        }
+
+        public static RepoMessage FromDomainSpeachToRepoSpeach(this DomainMessage item)
+        {
+            return new RepoMessage
+            {
+                Id = item.Id,
+                IdUser = item.IdUser,
+                SpeachId = item.SpeachId,
+                Text = item.Text,
+                Name = item.Name,
             };
         }
     }

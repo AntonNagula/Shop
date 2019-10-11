@@ -16,5 +16,9 @@ namespace InfructructureDataInterfaces.Repositories
         PurchaseRepositories<RepoBuyCar> BuyCars { get; }
 
         IRepositories<RepoBrands> Brands { get; }
+
+        IRepositories<RepoMessage> Messages { get; }
+
+        IRepositories<RepoSpeach> Speaches { get; }
     }
 }

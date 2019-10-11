@@ -57,6 +57,11 @@ namespace InfrustructureData.Repositories
             return db.Cars.Select(x=>x.FromCarToRepoCar()).ToList();
         }
 
+        public IEnumerable<RepoCar> GetRange(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(RepoCar item)
         {            
             Car car=db.Cars.Find(item.Id);         

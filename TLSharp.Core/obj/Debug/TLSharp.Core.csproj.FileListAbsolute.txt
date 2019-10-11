@@ -1,0 +1,24 @@
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TLSharp.Core\bin\Debug\TLSharp.Core.dll
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TLSharp.Core\bin\Debug\TLSharp.Core.pdb
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TLSharp.Core\bin\Debug\Ionic.ZLib.dll
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TLSharp.Core\bin\Debug\TeleSharp.TL.dll
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TLSharp.Core\bin\Debug\BigMath.dll
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TLSharp.Core\bin\Debug\TeleSharp.TL.pdb
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TLSharp.Core\bin\Debug\BigMath.xml
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TLSharp.Core\obj\Debug\TLSharp.Core.csprojAssemblyReference.cache
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TLSharp.Core\obj\Debug\TLSharp.Core.csproj.CoreCompileInputs.cache
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TLSharp.Core\obj\Debug\TLSharp.Core.csproj.CopyComplete
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TLSharp.Core\obj\Debug\TLSharp.Core.dll
+C:\Users\Banderos\Desktop\Viber\telegram\telegram\TLSharp.Core\obj\Debug\TLSharp.Core.pdb
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\TLSharp.Core\bin\Debug\TLSharp.Core.dll
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\TLSharp.Core\bin\Debug\TLSharp.Core.pdb
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\TLSharp.Core\bin\Debug\Ionic.ZLib.dll
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\TLSharp.Core\bin\Debug\TeleSharp.TL.dll
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\TLSharp.Core\bin\Debug\BigMath.dll
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\TLSharp.Core\bin\Debug\TeleSharp.TL.pdb
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\TLSharp.Core\bin\Debug\BigMath.xml
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\TLSharp.Core\obj\Debug\TLSharp.Core.csprojAssemblyReference.cache
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\TLSharp.Core\obj\Debug\TLSharp.Core.csproj.CoreCompileInputs.cache
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\TLSharp.Core\obj\Debug\TLSharp.Core.csproj.CopyComplete
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\TLSharp.Core\obj\Debug\TLSharp.Core.dll
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\TLSharp.Core\obj\Debug\TLSharp.Core.pdb

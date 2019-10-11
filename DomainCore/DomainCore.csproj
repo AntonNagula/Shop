@@ -46,6 +46,8 @@
     <Compile Include="Models\DomainBuyCar.cs" />
     <Compile Include="Models\DomainBuyer.cs" />
     <Compile Include="Models\DomainCar.cs" />
+    <Compile Include="Models\DomainMessage.cs" />
+    <Compile Include="Models\DomainSpeach.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

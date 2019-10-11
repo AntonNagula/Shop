@@ -568,3 +568,13 @@ C:\Users\Banderos\Desktop\проект на стажировку\Последн�
 C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\obj\Debug\Auto.csproj.CopyComplete
 C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\obj\Debug\Auto.dll
 C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\obj\Debug\Auto.pdb
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\TeleSharp.TL.dll
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\TLSharp.Core.dll
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\BigMath.dll
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\Ionic.ZLib.dll
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\TeleSharp.TL.pdb
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\TLSharp.Core.pdb
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\BigMath.xml
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\Method.tmp
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\Constructor.tmp
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\ConstructorAbs.tmp

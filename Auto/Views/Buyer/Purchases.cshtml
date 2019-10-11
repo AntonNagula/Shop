@@ -3,17 +3,12 @@
     Layout = "~/Views/Shared/NewHead.cshtml";
     ViewBag.Title = "Корзина";
 }
-@*<html>
-<head>
-    <link type="text/css" rel="stylesheet" href="~/Content/Site.css" />
-</head>
-<body>*@
 
     <table class="table">
         <tr>
             <th>Название модели</th>
-            <th>Стоимость</th>
             <th></th>
+            <th>Чат</th>
             <th>Статус</th>
             <th>Отказаться</th>
         </tr>
@@ -24,25 +19,30 @@
         <tr>
             <td>
                 <a href="#">@Html.DisplayFor(modelItem => i.Name)</a>
-            </td>
-            <td>
+                <br />
                 @Html.DisplayFor(modelItem => i.Price)$
-            </td>
+            </td>            
             <td>
                 <img src="~/Files/@i.ExtencionName" width="300" height="200" alt="@i.Name">
+            </td>
+            <td>
+                
+                <form method="get" action="/Buyer/OwnerSpeach">
+                    <input type="hidden" name="OwnerId" value="@i.OwnerId" />
+                    <input type="hidden" name="UserId" value="@ViewBag.Id" />
+                    <input type="hidden" name="CarId" value="@i.Id" />
+                    <button class="btn btn-success">Чат</button>
+                </form>
             </td>
             <td>
                 <p>@i.Status</p>
             </td>
             <td>
                 <form method="post" action="/Buyer/DeletePurch/@i.Id">
-                   <button class="btn btn-primary">Убрать из избранного</button>
-                </form>                
+                    <button class="btn btn-primary">Убрать из избранного</button>
+                </form>
             </td>
         </tr>
             }
         }
     </table>
-
-@*</body>
-</html>*@

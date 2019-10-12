@@ -107,6 +107,7 @@ namespace Auto.Mappers
                 IdUser = item.IdUser,
                 LastMes = item.LastMes,
                 Name = item.Name,
+                Readed = item.readed,
             };
         }
 
@@ -120,6 +121,8 @@ namespace Auto.Mappers
                 IdUser = item.IdUser,
                 LastMes = item.LastMes,
                 Name = item.Name,
+                readed=item.Readed,
+                
             };
         }
 

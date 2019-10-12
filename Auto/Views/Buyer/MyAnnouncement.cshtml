@@ -11,8 +11,7 @@
 
     <table class="table">
         <tr>
-            <th>Название модели</th>
-            <th>Стоимость</th>
+            <th>Название модели</th>            
             <th>Изображение</th>
             <th>Статус</th>
             <th>Покупатели</th>
@@ -35,14 +34,13 @@
             <td>
                 @i.Status
             </td>
-            <td>
-                <form method="get" action="/Buyer/AutoSpeach/@i.Id">
-                    <button class="btn btn-success">Чаты</button>
-                </form>
-            </td>
+            
             <td>
                 <form method="get" action="/Buyer/BuyersForCar/@i.Id">
                     <button class="btn btn-primary">Покупатели</button>
+                </form>
+                <form method="get" action="/Buyer/AutoSpeach/@i.Id">
+                    <button class="btn btn-success" style="">Чат</button>
                 </form>
             </td>
             <td>

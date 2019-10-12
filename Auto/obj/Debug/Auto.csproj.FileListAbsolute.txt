@@ -578,3 +578,6 @@ C:\Users\Banderos\Desktop\проект на стажировку\Последн�
 C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\Method.tmp
 C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\Constructor.tmp
 C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\ConstructorAbs.tmp
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\TeleSharp.Generator.exe
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\TeleSharp.Generator.pdb
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\TeleSharp.Generator.exe.config

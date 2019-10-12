@@ -12,6 +12,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using TeleSharp.TL;
+using TLSharp.Core;
 
 namespace Auto.Controllers
 {
@@ -48,7 +50,6 @@ namespace Auto.Controllers
             AppCar car = unit.GetCar(id).FromDomainCarToRepoCar();
             return View(car);
         }
-
         [HttpPost]
         public ActionResult Buy(int id)
         {
@@ -60,7 +61,7 @@ namespace Auto.Controllers
             if (result == true)
             {
                 message = "Благодарим за покупку";
-               // await Task.Run(()=>unit.SendMassege(mail,id));
+                //await Task.Run(()=>unit.SendMassege(mail,id));
             }
             else
                 message = "Вы уже отметили";
@@ -120,6 +121,7 @@ namespace Auto.Controllers
             int id = unit.GetBuyer(mail).Id;
             ViewBag.Id = id;
             List<AppCar> Cars = unit.GetCarsBuyerId(id).Select(x => x.FromDomainCarToRepoCar()).ToList();
+            
             return View(Cars);
         }
 
@@ -249,7 +251,7 @@ namespace Auto.Controllers
         [HttpGet]
         public ActionResult AutoSpeach(int Id)
         {
-            List<AppSpeach> speaches=unit.GetAutoSpeach(Id).Select(x=>x.FromDomainSpeachToSpeachSpeach()).ToList();
+            List<AppSpeach> speaches=unit.GetAutoSpeach(Id,HttpContext.User.Identity.Name).Select(x=>x.FromDomainSpeachToSpeachSpeach()).ToList();
             return View(speaches);
         }
 
@@ -257,7 +259,7 @@ namespace Auto.Controllers
         public ActionResult DelSpeach(int IdSpeach, int AutoId)
         {
             unit.DelSpeach(IdSpeach);
-            List<AppSpeach> speaches = unit.GetAutoSpeach(AutoId).Select(x => x.FromDomainSpeachToSpeachSpeach()).ToList();
+            List<AppSpeach> speaches = unit.GetAutoSpeach(AutoId,HttpContext.User.Identity.Name).Select(x => x.FromDomainSpeachToSpeachSpeach()).ToList();
             return View(speaches);
         }
     }

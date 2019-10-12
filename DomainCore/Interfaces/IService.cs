@@ -37,7 +37,7 @@ namespace DomainCore.Interfaces
         void CreateBrand(string brandName);
         IEnumerable<DomainBrands> GetAllBrands();
 
-        IEnumerable<DomainSpeach> GetAutoSpeach(int id);
+        IEnumerable<DomainSpeach> GetAutoSpeach(int IdCar, string name);
         IEnumerable<DomainSpeach> GetUserSpeach(int id);
         IEnumerable<DomainMessage> GetMessages(int idUser,int AutoId);
         IEnumerable<DomainMessage> GetRangeMessage(int id);

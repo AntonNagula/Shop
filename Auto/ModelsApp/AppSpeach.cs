@@ -13,5 +13,6 @@ namespace Auto.ModelsApp
         public string Name { get; set; }
         public int IdUser { get; set; }
         public string LastMes { get; set; }
+        public bool readed { get; set; }
     }
 }

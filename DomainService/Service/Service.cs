@@ -344,6 +344,10 @@ namespace DomainService.Service
             int id = Buyers.First(x => x.Email == name).Id;
             DomainMessage mes = new DomainMessage() { IdUser=id, SpeachId=idSpeach, Text=messages, Name=name};
             _Repositories.Messages.Create(mes.FromDomainSpeachToRepoSpeach());
+            //int idSpeachInList = Speaches.IndexOf(Speaches.Find(x=>x.Id==idSpeach));
+            //Speaches[idSpeachInList].LastMes=messages;
+            //Speaches[idSpeachInList].Readed = false;
+            //Speaches[idSpeachInList].Name = name;
             Messages.Add(mes);
         }
 
@@ -367,9 +371,12 @@ namespace DomainService.Service
 
         }
 
-        public IEnumerable<DomainSpeach> GetAutoSpeach(int id)
+        public IEnumerable<DomainSpeach> GetAutoSpeach(int IdCar,string name)
         {
-            return Speaches.Where(x=>x.IdCar==id).ToList();
+            //List<DomainSpeach> newmessges=Speaches.Where(x=>x.IdCar==id && x.Name!=name && x.Readed==false).ToList();
+            //List<DomainSpeach> othersmessges = Speaches.Where(x =>x.IdCar==id && !(x.Name != name && x.Readed == false)).ToList();
+            //newmessges.AddRange(othersmessges);
+            return Speaches.Where(x=>x.IdCar==IdCar);
         }
 
         public IEnumerable<DomainSpeach> GetUserSpeach(int id)

@@ -409,6 +409,18 @@
       <Project>{0ed3aae2-f4a6-4dbe-891b-0d66716bc15f}</Project>
       <Name>IoC</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TeleSharp.Generator\TeleSharp.Generator.csproj">
+      <Project>{9be3b9d4-9ff6-4dc8-b9cc-eb2e3f390129}</Project>
+      <Name>TeleSharp.Generator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TeleSharp.TL\TeleSharp.TL.csproj">
+      <Project>{d6144517-91d2-4880-86df-e9ff5d7f383a}</Project>
+      <Name>TeleSharp.TL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TLSharp.Core\TLSharp.Core.csproj">
+      <Project>{400d2544-1cc6-4d8a-a62c-2292d9947a16}</Project>
+      <Name>TLSharp.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

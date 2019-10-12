@@ -14,5 +14,6 @@ namespace DomainCore.Models
         public string Name { get; set; }
         public int IdUser { get; set; }
         public string LastMes { get; set; }
+        public bool Readed { get; set; }
     }
 }

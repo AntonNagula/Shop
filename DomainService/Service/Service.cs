@@ -87,6 +87,21 @@ namespace DomainService.Service
             return result;
         }
 
+        public IEnumerable<DomainCar> Annociment(int i, int size, string brand, out int Total, int IdBuyer)
+        {
+            List<DomainCar> currentcars;
+            if (brand != "Все")
+                currentcars = Cars.Where(x => x.CarBrand == brand && x.Status == "Продается" && x.OwnerId != IdBuyer).ToList();
+            else
+                currentcars = Cars.Where(x => x.Status == "Продается" && x.OwnerId != IdBuyer).ToList();
+            Total = currentcars.Count;
+            if (Total < size)
+                size = Total;
+            else if (i * size > Total)
+                i = Total / size + 1;
+            List<DomainCar> result = currentcars.Skip((i - 1) * size).Take(size).ToList();
+            return result;
+        }
         //
         public IEnumerable<DomainCar> GetAllCars()
         {

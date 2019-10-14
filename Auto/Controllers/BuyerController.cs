@@ -30,13 +30,13 @@ namespace Auto.Controllers
         {
             return View();
         }
-        public ActionResult Index(int i = 1,string brand="Все",string minPrise=null,string maxPrice=null)
+        public ActionResult Index(int i = 1,string brand="Все")
         {
             int Total, size = 6;
-            int min=minPrise==null ? 0 : int.Parse(minPrise), max=maxPrice==null ? 0 : int.Parse(maxPrice);
+            
             string mail = HttpContext.User.Identity.Name;
             int IdBuyer= unit.GetBuyer(mail).Id;
-            List<AppCar> b = unit.Annociment(i, size,brand, out Total,IdBuyer, min, max).Select(x => x.FromDomainCarToRepoCar()).ToList();
+            List<AppCar> b = unit.Annociment(i, size,brand, out Total,IdBuyer).Select(x => x.FromDomainCarToRepoCar()).ToList();
             PageInfo page = new PageInfo { PageSize = size, PageNumber = i, TotalItems = Total };
             ModelsApp.IndexViewModel index = new ModelsApp.IndexViewModel { PageInfo = page, Cars = b };
             List<string> CarBrands = unit.GetAllBrands().Select(x => x.FromAppBrandToBrand()).ToList();
@@ -61,7 +61,7 @@ namespace Auto.Controllers
             if (result == true)
             {
                 message = "Благодарим за покупку";
-                //await Task.Run(()=>unit.SendMassege(mail,id));
+                //await Task.Run(()=>SendMassege(mail,id));
             }
             else
                 message = "Вы уже отметили";

@@ -10,8 +10,8 @@
                         <label class="control-label">Бренд: </label>
                         @Html.DropDownList("brand", Model.Brands as SelectList,
                                     htmlAttributes: new { @class = "form-control" })
-                        <input type="text" placeholder="Минимальная цена" name="minPrise" class="form-control" />
-                        <input type="text" placeholder="Максимальная цена" name="maxPrice" class="form-control" />
+                        @*<input type="text" placeholder="Минимальная цена" name="minPrise" class="form-control" />
+                        <input type="text" placeholder="Максимальная цена" name="maxPrice" class="form-control" />*@
                         <input type="submit" value="Фильтр" class="btn btn-default" />
                     </div>
                 </form>

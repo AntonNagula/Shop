@@ -59,6 +59,7 @@ namespace Auto.Mappers
                 Id = item.Id,
                 Email = item.Email,
                 Telephone = item.Telephone,
+                TelegramID=item.TelegramID,
             };
         }
 
@@ -69,6 +70,7 @@ namespace Auto.Mappers
                 Id = item.Id,
                 Email = item.Email,
                 Telephone=item.Telephone,
+                TelegramID=item.TelegramID,
             };
         }
 
@@ -108,6 +110,7 @@ namespace Auto.Mappers
                 LastMes = item.LastMes,
                 Name = item.Name,
                 Readed = item.readed,
+                IsDeleted=item.IsDeleted,
             };
         }
 
@@ -122,7 +125,7 @@ namespace Auto.Mappers
                 LastMes = item.LastMes,
                 Name = item.Name,
                 readed=item.Readed,
-                
+                IsDeleted=item.IsDeleted,
             };
         }
 
@@ -146,7 +149,7 @@ namespace Auto.Mappers
                 IdUser = item.IdUser,
                 SpeachId = item.SpeachId,
                 Text = item.Text,
-                 Name=item.Name,
+                Name=item.Name,
             };
         }
     }

@@ -1,0 +1,20 @@
+
+@{int SpeachId = Model.FirstOrDefault().SpeachId; }
+<div class="container" style="margin-top:20px;">
+    <div class="row">
+        <div class="col-md-4">
+            <input id="SpeachId" type="hidden" name="SpeachId" value="@SpeachId" />
+            <input id="message" style="border-color:black;" class="form-control" type="text" name="message" />
+            <br />
+            <button id="btnsend" class="btn btn-success">Отправить</button>
+        </div>
+        <div class="col-md-8">
+            <div id="chat">
+                @foreach (var i in Model)
+                {
+                    <p>@i.Name:@i.Text</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

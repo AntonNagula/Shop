@@ -55,6 +55,7 @@ namespace DomainService.Mappers
                 Id = item.Id,
                 Email = item.Email,
                 Telephone = item.Telephone,
+                TelegramID=item.TelegramID,
             };
         }
 
@@ -66,6 +67,7 @@ namespace DomainService.Mappers
                 Id = item.Id,
                 Email = item.Email,
                 Telephone = item.Telephone,
+                TelegramID=item.TelegramID,
             };
         }
 
@@ -119,6 +121,7 @@ namespace DomainService.Mappers
                 IdUser =item.IdUser,
                 LastMes=item.LastMes,
                 Name = item.Name,
+                IsDeleted=item.IsDeleted,
             };
         }
 
@@ -132,6 +135,7 @@ namespace DomainService.Mappers
                 IdUser = item.IdUser,
                 LastMes = item.LastMes,
                 Name = item.Name,
+                IsDeleted=item.IsDeleted,
             };
         }
 

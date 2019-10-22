@@ -11,6 +11,7 @@ namespace InfructructureDataInterfaces.Models
         public int Id { get; set; }
         public string Email { get; set; }
         public string Telephone { get; set; }
+        public int TelegramID { get; set; }
         public virtual ICollection<RepoBuyCar> BuyCars { get; set; }
         public RepoBuyer()
         {

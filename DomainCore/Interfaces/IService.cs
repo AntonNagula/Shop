@@ -26,6 +26,7 @@ namespace DomainCore.Interfaces
         IEnumerable<DomainBuyer> GetBuyersByCarId(int id);
         DomainBuyer GetBuyer(int id);
         DomainBuyer GetBuyer(string email);
+        void CreateBuyer(string email, string phone);  
         void Create_Buyer(DomainBuyer item);
         void Update_Buyer(DomainBuyer item);
         void Delete_Buyer(int id);
@@ -33,22 +34,21 @@ namespace DomainCore.Interfaces
 
 
         bool Buy(DomainBuyCar item);
-        void Delete_Purchase(int Id,int BuyerId);
+        void Delete_Purchase(int CarId, int BuyerId);
 
         void CreateBrand(string brandName);
         IEnumerable<DomainBrands> GetAllBrands();
 
         IEnumerable<DomainSpeach> GetAutoSpeach(int IdCar, string name);
-        IEnumerable<DomainSpeach> GetUserSpeach(int id);
+        IEnumerable<DomainSpeach> GetUserSpeach(int idUser);
         IEnumerable<DomainMessage> GetMessages(int idUser,int AutoId);
         IEnumerable<DomainMessage> GetRangeMessage(int id);
         IEnumerable<DomainMessage> GetMessages(int idSpeach);
         IEnumerable<DomainMessage> OwnerGetMessages(int OwnerId,int UserId, int AutoId);
         void CreateSpeach(int AutoId, int UserId);
         void CreateMessage(int idSpeach, string name, string messages);
-        void RejectMessage(int AutoId, int BuyerId);
         void DelSpeach(int IdSpeach);
-        void SendMassege(string mail,int CarId);
-        
+
+        int Create_Code_Telegramm(int Id, string telephone);
     }
 }

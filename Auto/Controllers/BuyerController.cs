@@ -12,8 +12,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
-using TeleSharp.TL;
-using TLSharp.Core;
 
 namespace Auto.Controllers
 {
@@ -61,7 +59,6 @@ namespace Auto.Controllers
             if (result == true)
             {
                 message = "Благодарим за покупку";
-                //await Task.Run(()=>SendMassege(mail,id));
             }
             else
                 message = "Вы уже отметили";
@@ -212,31 +209,37 @@ namespace Auto.Controllers
         public ActionResult DeletePurch(int Id)
         {            
             int BuyerId = unit.GetBuyer(User.Identity.Name).Id;
-            unit.Delete_Purchase(Id,BuyerId);
-            unit.RejectMessage(Id,BuyerId);
+            unit.Delete_Purchase(Id,BuyerId);            
             List<AppCar> Cars = unit.GetCarsBuyerId(BuyerId).Select(x => x.FromDomainCarToRepoCar()).ToList();
             return View(Cars);            
-        }        
+        }
 
+        // Вызывается когда продавец хочет поговорить с покупателем
         [HttpGet]
-        public ActionResult Speach(int Id, int CarId)
+        public ActionResult Speach(int IdUser, int CarId)
         {
-            List<AppMessage> messages = unit.GetMessages(Id, CarId).Select(x => x.FromDomainMessageToAppMessage()).ToList();
+            List<AppMessage> messages = unit.GetMessages(IdUser, CarId).Select(x => x.FromDomainMessageToAppMessage()).ToList();
             return View(messages);
         }
 
         [HttpPost]
         public ActionResult Speach(int SpeachId, string message)
         {
-            unit.CreateMessage(SpeachId,HttpContext.User.Identity.Name,message);
+            unit.CreateMessage(SpeachId, HttpContext.User.Identity.Name, message);
             List<AppMessage> messages = unit.GetMessages(SpeachId).Select(x => x.FromDomainMessageToAppMessage()).ToList();
             return View(messages);
         }
-        
+
+        // Вызывается когда покупатель хочет поговорить с продавцом
         [HttpGet]
-        public ActionResult OwnerSpeach(int OwnerId, int UserId, int CarId)
+        public ActionResult OwnerSpeach(int? OwnerId, int UserId, int CarId)
         {
-            List<AppMessage> messages = unit.OwnerGetMessages(OwnerId, UserId, CarId).Select(x => x.FromDomainMessageToAppMessage()).ToList();
+            if (OwnerId == null)
+            {
+                ViewBag.Message = "Данный диалог более не поддерживается, так как заявка удалена";
+                return View("Buy");
+            }
+            List<AppMessage> messages = unit.OwnerGetMessages((int)OwnerId, UserId, CarId).Select(x => x.FromDomainMessageToAppMessage()).ToList();
             return View(messages);
         }
 
@@ -262,5 +265,43 @@ namespace Auto.Controllers
             List<AppSpeach> speaches = unit.GetAutoSpeach(AutoId,HttpContext.User.Identity.Name).Select(x => x.FromDomainSpeachToSpeachSpeach()).ToList();
             return View(speaches);
         }
+
+        [HttpPost]
+        public JsonResult sendmsg(string message, int SpeachId)
+        {
+            unit.CreateMessage(SpeachId, HttpContext.User.Identity.Name, message);
+            return Json(null);
+        }
+
+
+        [HttpGet]
+        public JsonResult ReciveMSG(int SpeachId)
+        {
+            List<AppMessage> messages = unit.GetMessages(SpeachId).Select(x => x.FromDomainMessageToAppMessage()).ToList();
+            return Json(messages, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpGet]
+        public ActionResult ConnectTelegramm()
+        {
+            string mail = User.Identity.Name;
+            AppBuyer buyer = unit.GetBuyer(mail).FromDomainBuyerToRepoBuyer();
+            return View(buyer);
+        }
+
+        [HttpPost]
+        public JsonResult ConnectTelegramm(int Id,string telephone)
+        {
+            int val=unit.Create_Code_Telegramm(Id,telephone);            
+            return Json(new { value = val }, JsonRequestBehavior.AllowGet);
+        }
+
+        //[HttpGet]
+        //public JsonResult CodeTelegramm(int Id, string telephone)
+        //{
+        //    unit.Get
+        //    return Json(null);
+        //}
     }
 }

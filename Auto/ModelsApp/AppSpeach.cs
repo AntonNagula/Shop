@@ -14,5 +14,6 @@ namespace Auto.ModelsApp
         public int IdUser { get; set; }
         public string LastMes { get; set; }
         public bool readed { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

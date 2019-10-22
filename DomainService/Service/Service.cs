@@ -5,15 +5,17 @@ using DomainService.Mappers;
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using TLSharp.Core;
-using TeleSharp.TL;
+using Telegram.Bot;
+using Telegram.Bot.Args;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace DomainService.Service
 {
     public class Service : IService
     {        
         public readonly IUnitOfWork _Repositories;
-
+        static ITelegramBotClient botClient;
         public void CreateBrand(string brandName)
         {
             DomainBrands brand = new DomainBrands {  BrandName=brandName};
@@ -27,6 +29,45 @@ namespace DomainService.Service
         List<DomainSpeach> Speaches;
         List<DomainMessage> Messages;
 
+
+        // telegramm
+        public void SendMessage()
+        {         
+             
+            botClient.OnMessage += Bot_OnMessage;
+            botClient.StartReceiving();
+            Thread.Sleep(int.MaxValue);
+        }
+        void Bot_OnMessage(object sender, MessageEventArgs e)
+        {
+            if (e.Message.Text != null)
+            {
+                int code = Int32.Parse(e.Message.Text);
+                bool b = Buyers.Exists(x=>x.AuthCode == code);
+                if (b == true)
+                {
+                    DomainBuyer buyer = Buyers.First(x => x.AuthCode == code);
+                    Buyers.Remove(buyer);
+                    buyer.TelegramID = e.Message.From.Id;
+                    Buyers.Add(buyer);
+                    _Repositories.Buyers.Update(buyer.FromDomainBuyerToRepoBuyer());
+                    Task.Run(() => Bot_OnMessage("Подписка прошла успешно", buyer.TelegramID));
+                }
+            }
+        }
+        public int Create_Code_Telegramm(int Id, string telephone)
+        {
+            Random rnd = new Random();
+            int value = rnd.Next(100000, 1000000);
+            DomainBuyer b = Buyers.First(x=>x.Id==Id);
+            Buyers.Remove(b);
+            b.AuthCode = value;
+            b.Telephone = telephone;
+            Buyers.Add(b);
+            _Repositories.Buyers.Update(b.FromDomainBuyerToRepoBuyer());
+            return value;
+        }
+
         public Service(IUnitOfWork Repository)
         {
             _Repositories = Repository;
@@ -36,7 +77,9 @@ namespace DomainService.Service
             Brands = Repository.Brands.GetAll().Select(x => x.FromRepoBrandToDomainBrand()).ToList();
             Messages = Repository.Messages.GetAll().Select(x => x.FromRepoMessageToDomainMessage()).ToList();
             Speaches = Repository.Speaches.GetAll().Select(x => x.FromRepoSpeachToDomainSpeach()).ToList();
-        }       
+            botClient = new TelegramBotClient("986923820:AAH7Df3wrTKkfsusnCrWpnash3RZPChCOgI");
+            Task.Run(()=>SendMessage());
+        }
         //
         public IEnumerable<DomainBrands> GetAllBrands()
         {
@@ -135,6 +178,7 @@ namespace DomainService.Service
             return Cars.FirstOrDefault(x=>x.Id==id);
         }
         //
+
         //
         public void Create_Car(DomainCar item)
         {
@@ -204,8 +248,9 @@ namespace DomainService.Service
             BuyCars.Clear();
             BuyCars = _Repositories.BuyCars.GetAll().Select(x => x.FromRepoBuyCarToDomainBuyCar()).ToList();
         }
-                
-        //
+
+
+        //               
         public bool Buy(DomainBuyCar item)
         {          
             DomainCar car=Cars.FirstOrDefault(x=>x.Id==item.CarId);
@@ -213,7 +258,10 @@ namespace DomainService.Service
             item.Buyer = Buyers.FirstOrDefault(x=>x.Id==item.BuyerId);
             DomainBuyCar obj = BuyCars.FirstOrDefault(x=>x.CarId==item.CarId && x.BuyerId==item.BuyerId);
             if (obj==null)
-            {                
+            {
+                botClient = new TelegramBotClient("986923820:AAH7Df3wrTKkfsusnCrWpnash3RZPChCOgI");
+                Task.Run(()=>Bot_OnMessage(item.Buyer.Email+" хочет купить "+item.Car.Name,Buyers.First(x=>x.Id==car.OwnerId).TelegramID));
+                                
                 _Repositories.BuyCars.Create(item.FromDomainBuyCarToRepoBuyCar());
                 BuyCars.Add(item);
                 return true;
@@ -221,8 +269,17 @@ namespace DomainService.Service
 
             return false;
         }
+        //telegramm
+        static async void Bot_OnMessage(string message,int chatid)
+        {
+            await botClient.SendTextMessageAsync(
 
-        
+                  chatId: chatid,
+                  text: message +"\n"
+                );
+        }
+        //
+        //
 
 
         //
@@ -251,6 +308,17 @@ namespace DomainService.Service
             return Buyers.FirstOrDefault(x=>x.Id==id);
         }
 
+
+        //
+        public void CreateBuyer(string email,string phone)
+        {
+            DomainBuyer model = new DomainBuyer { Email = email, Telephone=phone };
+            Buyers.Add(model);
+            _Repositories.Buyers.Create(model.FromDomainBuyerToRepoBuyer());
+            Buyers.Clear();
+            Buyers = _Repositories.Buyers.GetAll().Select(x => x.FromRepoBuyerToDomainBuyer()).ToList();
+            
+        }
         //
         public DomainBuyer GetBuyer(string email)
         {
@@ -308,21 +376,29 @@ namespace DomainService.Service
         }
         
         //
-        public void Delete_Purchase(int Id,int BuyerId)
+        public void Delete_Purchase(int CarId,int BuyerId)
         {
-            DomainBuyCar buyCar = BuyCars.FirstOrDefault(x=>x.CarId==Id && x.BuyerId==BuyerId);
+            DomainBuyCar buyCar = BuyCars.FirstOrDefault(x=>x.CarId== CarId && x.BuyerId==BuyerId);
             _Repositories.BuyCars.Delete(buyCar.FromDomainBuyCarToRepoBuyCar());
             BuyCars.Remove(buyCar);
+            bool flag = Speaches.Exists(x => x.IdCar == CarId && x.IdUser == BuyerId && x.IsDeleted == false);
+            if (flag == true)
+            {
+                DomainSpeach speach = Speaches.First(x => x.IdCar == CarId && x.IdUser == BuyerId && x.IsDeleted == false);
+                Speaches.Remove(speach);
+                speach.IsDeleted = true;
+                _Repositories.Speaches.Update(speach.FromDomainSpeachToSpeachSpeach());
+            }
         }
                
 
         public IEnumerable<DomainMessage> GetMessages(int idUser, int AutoId)
         {
             int idSpeach;
-            bool sp= Speaches.Exists(x => x.IdCar == AutoId && x.IdUser == idUser);
+            bool sp= Speaches.Exists(x => x.IdCar == AutoId && x.IdUser == idUser && x.IsDeleted==false);
             if(sp==false)
             {
-                DomainSpeach speach = new DomainSpeach() { IdCar=AutoId, IdUser=idUser, IdOwner=(int)Cars.First(x=>x.Id==AutoId).OwnerId, Name=Buyers.First(x=>x.Id==idUser).Email};
+                DomainSpeach speach = new DomainSpeach() { IdCar=AutoId, IdUser=idUser, IdOwner=(int)Cars.First(x=>x.Id==AutoId).OwnerId, Name=Buyers.First(x=>x.Id==idUser).Email, IsDeleted=false};
                 _Repositories.Speaches.Create(speach.FromDomainSpeachToSpeachSpeach());
                 Speaches= _Repositories.Speaches.GetAll().Select(x=>x.FromRepoSpeachToDomainSpeach()).ToList();
                 idSpeach = Speaches.First(x => x.IdCar == AutoId && x.IdUser == idUser).Id;
@@ -349,7 +425,7 @@ namespace DomainService.Service
 
         public void CreateSpeach(int AutoId, int UserId)
         {
-            DomainSpeach speach = new DomainSpeach() { IdCar = AutoId, IdUser = UserId };
+            DomainSpeach speach = new DomainSpeach() { IdCar = AutoId, IdUser = UserId, IsDeleted=false };
             _Repositories.Speaches.Create(speach.FromDomainSpeachToSpeachSpeach());
 
         }
@@ -364,55 +440,35 @@ namespace DomainService.Service
             //Speaches[idSpeachInList].Readed = false;
             //Speaches[idSpeachInList].Name = name;
             Messages.Add(mes);
-        }
-
-        public void RejectMessage(int AutoId, int BuyerId)
-        {            
-            bool sp = Speaches.Exists(x => x.IdCar == AutoId && x.IdUser == BuyerId);
-            if (sp == true)
-            {
-                string name = Buyers.First(x => x.Id == BuyerId).Email;
-                int idSpeach = Speaches.First(x => x.IdCar == AutoId && x.IdUser == BuyerId).Id;
-                DomainMessage message = new DomainMessage() { SpeachId = idSpeach, IdUser = BuyerId, Text = "Данное предложение более не актуально для меня", Name = name};
-                Messages.Add(message);
-                _Repositories.Messages.Create(message.FromDomainSpeachToRepoSpeach());
-                Messages.Clear();
-                Messages = _Repositories.Messages.GetAll().Select(x => x.FromRepoMessageToDomainMessage()).ToList();
-                DomainSpeach speach=Speaches.First(x => x.Id == idSpeach);
-                speach.Name =name+" более не поддерживает диалог";
-                speach.IdUser = 0;
-                _Repositories.Speaches.Update(speach.FromDomainSpeachToSpeachSpeach());
-            }          
-
-        }
+        }        
 
         public IEnumerable<DomainSpeach> GetAutoSpeach(int IdCar,string name)
         {
             //List<DomainSpeach> newmessges=Speaches.Where(x=>x.IdCar==id && x.Name!=name && x.Readed==false).ToList();
             //List<DomainSpeach> othersmessges = Speaches.Where(x =>x.IdCar==id && !(x.Name != name && x.Readed == false)).ToList();
             //newmessges.AddRange(othersmessges);
-            return Speaches.Where(x=>x.IdCar==IdCar);
+            return Speaches.Where(x=>x.IdCar==IdCar && x.IsDeleted==false);
         }
 
-        public IEnumerable<DomainSpeach> GetUserSpeach(int id)
+        public IEnumerable<DomainSpeach> GetUserSpeach(int idUser)
         {
-            return Speaches.Where(x => x.IdUser == id).ToList();
+            return Speaches.Where(x => x.IdUser == idUser && x.IsDeleted==false).ToList();
         }
 
         public IEnumerable<DomainSpeach> GetOwnerSpeach(int id)
         {
-            return Speaches.Where(x => x.IdOwner == id).ToList();
+            return Speaches.Where(x => x.IdOwner == id && x.IsDeleted==false).ToList();
         }
 
         public IEnumerable<DomainMessage> OwnerGetMessages(int OwnerId,int UserId, int AutoId)
         {
             int idSpeach;
-            bool sp = Speaches.Exists(x => x.IdCar == AutoId && x.IdOwner == OwnerId);
-            if (sp == false)
+            bool sp = Speaches.Exists(x => x.IdCar == AutoId && x.IdOwner == OwnerId && x.IsDeleted==false);
+            if (sp != true)
             {
-                DomainSpeach speach = new DomainSpeach() { IdCar = AutoId, IdOwner=OwnerId, IdUser = UserId, Name=Buyers.First(x=>x.Id==UserId).Email };
+                DomainSpeach speach = new DomainSpeach() { IdCar = AutoId, IdOwner=OwnerId, IdUser = UserId, Name=Buyers.First(x=>x.Id==UserId).Email, IsDeleted=false };
                 _Repositories.Speaches.Create(speach.FromDomainSpeachToSpeachSpeach());
-                Speaches = _Repositories.Speaches.GetAll().Select(x => x.FromRepoSpeachToDomainSpeach()).ToList();
+                Speaches = _Repositories.Speaches.GetAll().Where(x=>x.IsDeleted==false).Select(x => x.FromRepoSpeachToDomainSpeach()).ToList();
                 idSpeach = Speaches.First(x => x.IdCar == AutoId && x.IdOwner==OwnerId).Id;
                 DomainMessage message = new DomainMessage() { SpeachId = idSpeach, IdUser = OwnerId, Text = "Здравствуйте", Name = Buyers.First(x => x.Id == OwnerId).Email };
                 Messages.Add(message);
@@ -427,60 +483,10 @@ namespace DomainService.Service
 
         public void DelSpeach(int IdSpeach)
         {
-            DomainSpeach speach = Speaches.First(x => x.Id == IdSpeach);
-            int id = Speaches.IndexOf(speach);
-            speach.IdCar = 0;     
-            Speaches[id].IdCar = 0;
+            DomainSpeach speach = Speaches.First(x => x.Id == IdSpeach && x.IsDeleted==false);
+            Speaches.Remove(speach);
+            speach.IsDeleted = true;            
             _Repositories.Speaches.Update(speach.FromDomainSpeachToSpeachSpeach());
-        }
-
-
-        public async void SendMassege(string mail, int CarId)
-        {
-            string number = Buyers.First(x=>x.Id==Cars.First(_ => _.Id == CarId).OwnerId).Telephone;
-
-            var client = new TelegramClient(956436, "b1a9d979ab2e0a0da72061f66189e0e7");
-
-            await client.ConnectAsync();
-
-            var hash = await client.SendCodeRequestAsync("+375293061643");
-            var code = "48125"; // you can change code in debugger
-
-            //var user = await client.MakeAuthAsync("+375293061643", hash, code);
-
-            //TeleSharp.TL.Contacts.TLRequestImportContacts requestImportContacts = new TeleSharp.TL.Contacts.TLRequestImportContacts();
-            //requestImportContacts.Contacts = new TLVector<TLInputPhoneContact>();
-            //requestImportContacts.Contacts.Add(new TLInputPhoneContact()
-            //{
-            //    Phone = "00375257055814",
-            //    FirstName = "Холден",
-            //    LastName = "Колфилд"
-            //});
-            //var o = await client.SendRequestAsync<TeleSharp.TL.Contacts.TLImportedContacts>((TLMethod)requestImportContacts);
-            //var NewUserId = (o.Users.First() as TLUser).Id;
-            //var d = await client.SendMessageAsync(new TLInputPeerUser() { UserId = NewUserId }, "test message text");
-
-
-            //using (FileStream fstream = new FileStream(@"C:\Users\Banderos\Desktop\Viber\telegram\telegram\note.txt", FileMode.OpenOrCreate))
-            //{
-            //    // преобразуем строку в байты
-            //    byte[] array = Encoding.Default.GetBytes(hash);
-            //    // запись массива байтов в файл
-            //    fstream.Write(array, 0, array.Length);
-            //}
-            var user = await client.MakeAuthAsync("+375293061643",hash, code);
-
-
-            var result = await client.GetContactsAsync();
-            var users = result.Users
-                .Where(x => x.GetType() == typeof(TLUser))
-                .Cast<TLUser>()
-                .FirstOrDefault(x => x.Phone == "375333586708");
-
-
-            //send message
-            var d = await client.SendMessageAsync(new TLInputPeerUser() { UserId = users.Id }, mail+" хочет купить ваше авто(Тестовое сообщение, не обращай внимание)");
-
-        }
+        }        
     }
 }

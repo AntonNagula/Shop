@@ -48,7 +48,7 @@ namespace InfrustructureData.Repositories
 
         public void DeleteRange()
         {
-            List<Speach> speaches = db.Speaches.Where(x=>x.IdCar==0 && x.IdUser==0).ToList();
+            List<Speach> speaches = db.Speaches.Where(x=>x.IsDeleted==true).ToList();
             for (int i = 0; i < speaches.Count; i++)
             {
                 List<Message> messages = db.Messages.Where(x => x.SpeachId==speaches[i].Id).ToList();
@@ -67,6 +67,7 @@ namespace InfrustructureData.Repositories
             sp.IdUser = item.IdUser;
             sp.IdOwner = item.IdOwner;
             sp.IdCar = item.IdCar;
+            sp.IsDeleted = item.IsDeleted;
             db.Entry(sp).State = EntityState.Modified;
             db.SaveChanges();
         }

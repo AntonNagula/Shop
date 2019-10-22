@@ -11,6 +11,7 @@ namespace InfrustructureData.DataModels
         public int Id { get; set; }
         public string Email { get; set; }
         public string Telephone { get; set; }
+        public int TelegramID { get; set; }
         public virtual ICollection<BuyCar> BuyCars { get; set; }
         public virtual ICollection<Car> Cars { get; set; }
         public Buyer()

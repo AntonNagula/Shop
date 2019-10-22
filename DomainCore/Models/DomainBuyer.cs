@@ -11,6 +11,8 @@ namespace DomainCore.Models
         public int Id { get; set; }
         public string Email { get; set; }
         public string Telephone { get; set; }
+        public int TelegramID { get; set; }
+        public int AuthCode { get; set; }
         public virtual ICollection<DomainBuyCar> BuyCars { get; set; }
         public DomainBuyer()
         {

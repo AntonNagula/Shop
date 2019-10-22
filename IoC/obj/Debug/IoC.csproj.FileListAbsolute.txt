@@ -447,13 +447,7 @@ C:\Users\Banderos\Desktop\проект на стажировку\Последн�
 C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\obj\Debug\IoC.csproj.CopyComplete
 C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\obj\Debug\IoC.dll
 C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\obj\Debug\IoC.pdb
-C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\bin\Debug\Method.tmp
-C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\bin\Debug\Constructor.tmp
-C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\bin\Debug\ConstructorAbs.tmp
-C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\bin\Debug\TeleSharp.TL.dll
-C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\bin\Debug\TLSharp.Core.dll
-C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\bin\Debug\BigMath.dll
-C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\bin\Debug\Ionic.ZLib.dll
-C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\bin\Debug\TeleSharp.TL.pdb
-C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\bin\Debug\TLSharp.Core.pdb
-C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\bin\Debug\BigMath.xml
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\bin\Debug\Telegram.Bot.dll
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\bin\Debug\Telegram.Bot.xml
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\IoC\bin\Debug\Newtonsoft.Json.xml

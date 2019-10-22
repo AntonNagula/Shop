@@ -12,6 +12,7 @@ namespace InfructructureDataInterfaces.Models
         public int IdCar { get; set; }
         public int IdUser { get; set; }
         public int IdOwner { get; set; }
+        public bool IsDeleted { get; set; }
         public string Name { get; set; }
         public string LastMes { get; set; }
     }

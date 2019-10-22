@@ -14,6 +14,7 @@ namespace InfrustructureData.DataModels
         public int IdOwner { get; set; }
         public string LastMes { get; set; }
         public string Name { get; set; }
+        public bool IsDeleted { get; set; }
         public ICollection<Message> Messages { get; set; }
         public Speach()
         {

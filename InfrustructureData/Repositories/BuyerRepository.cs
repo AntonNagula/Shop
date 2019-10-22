@@ -46,7 +46,13 @@ namespace InfrustructureData.Repositories
 
         public void Update(RepoBuyer item)
         {
-            throw new NotImplementedException();
+            int id = item.Id;
+            Buyer b=db.Buyers.Find(id);
+            b.TelegramID = item.TelegramID;
+            b.Email = item.Email;
+            b.Telephone = item.Telephone;
+            db.Entry(b).State = EntityState.Modified;
+            db.SaveChanges();
         }
 
         public void DeleteRange()

@@ -34,14 +34,21 @@
     <Reference Include="AutoMapper, Version=4.0.4.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.4.0.4\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Telegram.Bot, Version=15.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telegram.Bot.15.0.0\lib\net45\Telegram.Bot.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Mappers\Map.cs" />
@@ -59,18 +66,6 @@
     <ProjectReference Include="..\InfructructureDataInterfaces\InfructructureDataInterfaces.csproj">
       <Project>{5e85a6b9-8d26-454a-bcc3-f21698714be1}</Project>
       <Name>InfructructureDataInterfaces</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TeleSharp.Generator\TeleSharp.Generator.csproj">
-      <Project>{9be3b9d4-9ff6-4dc8-b9cc-eb2e3f390129}</Project>
-      <Name>TeleSharp.Generator</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TeleSharp.TL\TeleSharp.TL.csproj">
-      <Project>{d6144517-91d2-4880-86df-e9ff5d7f383a}</Project>
-      <Name>TeleSharp.TL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TLSharp.Core\TLSharp.Core.csproj">
-      <Project>{400d2544-1cc6-4d8a-a62c-2292d9947a16}</Project>
-      <Name>TLSharp.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

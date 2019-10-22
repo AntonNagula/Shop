@@ -1,0 +1,42 @@
+﻿@model Auto.ModelsApp.AppBuyer
+@{
+    Layout = "~/Views/Shared/ForCreate.cshtml";
+    ViewBag.Title = "Подписка в телеграмм";
+}
+<div id="start1">
+
+    <p>Для подключения оповещений в телеграмм, нужен ваш номер телефона. Формат: +375..</p>
+    <input type="hidden" name="Id" id="Id" value=@Model.Id />
+    <input style="width:300px;height:20px;" class="form-control input-fixed" id="telephone" type="text" name="Telephone" required="required" placeholder="Введите номер телефона" /><br>
+    <input style="width:300px;height:20px;" class="form-control input-fixed" id="code" type="text" name="TelegramID" placeholder="Ваш код подтверждения"><br>
+    <p>
+        <button style="float:left;" class="btn btn-success" id="btnsend">Прислать код</button>
+
+    </p>
+</div>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+            $("#btnsend").click(function () {
+                var telephone = $("#telephone").val();
+                var id = $("#Id").val();                
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: '{"Id":"' + id + '","telephone":"' + telephone + '"}',
+                    url: "@Url.Action("ConnectTelegramm")",
+                    dataType: "json",
+                    success: function (response) {
+                        $("#code").val(response.value);
+                        
+                    },
+                    error: function (response) {
+                        alert("324356");
+                    }
+                });
+            });            
+        });
+</script>

@@ -15,5 +15,6 @@ namespace DomainCore.Models
         public int IdUser { get; set; }
         public string LastMes { get; set; }
         public bool Readed { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

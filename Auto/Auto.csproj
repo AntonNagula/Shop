@@ -279,6 +279,7 @@
     <Compile Include="ModelsApp\BrandsListViewModel.cs" />
     <Compile Include="ModelsApp\DropList.cs" />
     <Compile Include="ModelsApp\EmailModel.cs" />
+    <Compile Include="ModelsApp\FormForDialoge.cs" />
     <Compile Include="ModelsApp\IndexViewModel.cs" />
     <Compile Include="ModelsApp\InfoToBuy.cs" />
     <Compile Include="ModelsApp\PageInfo.cs" />
@@ -314,7 +315,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -358,7 +361,6 @@
     <Content Include="Views\Home\ShowCar.cshtml" />
     <Content Include="Views\Admin\Delete.cshtml" />
     <Content Include="Views\Admin\DeleteCar.cshtml" />
-    <Content Include="Views\Buyer\Buy.cshtml" />
     <Content Include="Views\Shared\User.cshtml" />
     <Content Include="Views\Buyer\Create.cshtml" />
     <Content Include="Views\Buyer\MyAnnouncement.cshtml" />
@@ -382,6 +384,7 @@
     <Content Include="Views\Buyer\OwnerSpeach.cshtml" />
     <Content Include="Views\Buyer\DelSpeach.cshtml" />
     <Content Include="Views\Buyer\ConnectTelegramm.cshtml" />
+    <Content Include="Views\Buyer\Buy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

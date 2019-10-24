@@ -11,12 +11,7 @@ using Ninject.Web.Common;
 namespace IoC
 {
     public class Module : NinjectModule
-    {
-        private string _connectionString;
-        public Module(string connectionstring)
-        {
-            _connectionString = connectionstring;
-        }
+    {       
 
         public override void Load()
         {            
@@ -28,6 +23,7 @@ namespace IoC
             Bind<IService>().To<Service>().InSingletonScope();
             Bind<IRepositories<RepoMessage>>().To<MessageRepository>().InSingletonScope();
             Bind<IRepositories<RepoSpeach>>().To<SpeachRepository>().InSingletonScope();
+            Bind<AutoContext>().ToSelf().InSingletonScope();
         }
 
     }

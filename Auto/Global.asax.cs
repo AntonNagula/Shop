@@ -21,7 +21,7 @@ namespace Auto
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            NinjectModule registrations = new Module("AutoContext");
+            NinjectModule registrations = new Module();
             var kernel = new StandardKernel(registrations);
             DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }

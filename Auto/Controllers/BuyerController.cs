@@ -49,7 +49,7 @@ namespace Auto.Controllers
             return View(car);
         }
         [HttpPost]
-        public ActionResult Buy(int id)
+        public JsonResult Buy(int id)
         {
             string mail=HttpContext.User.Identity.Name;
             int buyerId = unit.GetBuyer(mail).Id;
@@ -59,11 +59,13 @@ namespace Auto.Controllers
             if (result == true)
             {
                 message = "Благодарим за покупку";
+                return Json(new { value = message }, JsonRequestBehavior.AllowGet);
             }
             else
+            {
                 message = "Вы уже отметили";
-            ViewBag.Message = message;
-            return View();
+                return Json(new { value = message }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpGet]
@@ -238,9 +240,13 @@ namespace Auto.Controllers
             {
                 ViewBag.Message = "Данный диалог более не поддерживается, так как заявка удалена";
                 return View("Buy");
-            }
+            }            
             List<AppMessage> messages = unit.OwnerGetMessages((int)OwnerId, UserId, CarId).Select(x => x.FromDomainMessageToAppMessage()).ToList();
-            return View(messages);
+            FormForDialoge dialoge = new FormForDialoge();
+            dialoge.Id = messages[0].SpeachId;
+            dialoge.Name = User.Identity.Name;
+            dialoge.messages = messages;
+            return View(dialoge);
         }
 
         [HttpPost]
@@ -277,11 +283,11 @@ namespace Auto.Controllers
         [HttpGet]
         public JsonResult ReciveMSG(int SpeachId)
         {
-            List<AppMessage> messages = unit.GetMessages(SpeachId).Select(x => x.FromDomainMessageToAppMessage()).ToList();
-            return Json(messages, JsonRequestBehavior.AllowGet);
+            string message = unit.GetLatestMessage(SpeachId);
+            return Json(message, JsonRequestBehavior.AllowGet);
         }
 
-
+        // Два метода для привязки телеграмма к аккаунту
         [HttpGet]
         public ActionResult ConnectTelegramm()
         {
@@ -295,13 +301,6 @@ namespace Auto.Controllers
         {
             int val=unit.Create_Code_Telegramm(Id,telephone);            
             return Json(new { value = val }, JsonRequestBehavior.AllowGet);
-        }
-
-        //[HttpGet]
-        //public JsonResult CodeTelegramm(int Id, string telephone)
-        //{
-        //    unit.Get
-        //    return Json(null);
-        //}
+        }        
     }
 }

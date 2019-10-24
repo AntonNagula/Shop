@@ -19,7 +19,8 @@
                     @Html.DisplayFor(modelItem => i.Email)
                 </td>
                 <td>                    
-                    <form method="get" action="/Buyer/Speach/@i.Id">
+                    <form method="get" action="/Buyer/Speach">
+                        <input type="hidden" name="IdUser" value="@i.Id" />
                         <input type="hidden" name="CarId" value="@ViewBag.CarId" />
                         <button class="btn btn-success">Чат</button>
                     </form>

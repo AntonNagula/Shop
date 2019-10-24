@@ -272,6 +272,7 @@ namespace Auto.Controllers
             return View(speaches);
         }
 
+        // методы для отправка и принятия сообщений с помощью ajax
         [HttpPost]
         public JsonResult sendmsg(string message, int SpeachId)
         {

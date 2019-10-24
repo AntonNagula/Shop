@@ -29,10 +29,11 @@
                 send();
             });
             setInterval(function () {
+                var SpeachId = $("#SpeachId").val();
                 $.ajax({
                     type: "POST",
                     contentType: "application/json; charset=utf-8",
-                    data: '{"SpeachId":"' + @Model.Id + '"}',
+                    data: '{"SpeachId":"' + SpeachId + '"}',
                     url: "@Url.Action("ReciveMSG")",
                     dataType: "json",
                     success: function (response) {

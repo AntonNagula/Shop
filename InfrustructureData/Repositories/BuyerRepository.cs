@@ -55,12 +55,22 @@ namespace InfrustructureData.Repositories
             db.SaveChanges();
         }
 
-        public void DeleteRange()
+        public IEnumerable<RepoBuyer> GetRange(int id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<RepoBuyer> GetRange(int id)
+        public void DeleteRange(List<RepoBuyer> items)
+        {            
+            foreach (RepoBuyer b in items)
+            {
+                Buyer delete = db.Buyers.FirstOrDefault(x => x.Id == b.Id);
+                db.Buyers.Remove(delete);
+            }
+            db.SaveChanges();
+        }
+
+        public void DeleteWasteEntities()
         {
             throw new NotImplementedException();
         }

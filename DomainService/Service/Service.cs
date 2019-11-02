@@ -16,11 +16,19 @@ namespace DomainService.Service
     {
         public readonly IUnitOfWork _Repositories;
         static ITelegramBotClient botClient;
-        public void CreateBrand(string brandName)
+
+        public Service(IUnitOfWork Repository)
         {
-            DomainBrands brand = new DomainBrands { BrandName = brandName };
-            _Repositories.Brands.Create(brand.FromDomainBrandToRepoBrand());
-        }
+            _Repositories = Repository;
+            Cars = Repository.Cars.GetAll().Select(x => x.FromRepoCarToDomainCar()).ToList();
+            BuyCars = Repository.BuyCars.GetAll().Select(x => x.FromRepoBuyCarToDomainBuyCar()).ToList();
+            Buyers = Repository.Buyers.GetAll().Select(x => x.FromRepoBuyerToDomainBuyer()).ToList();
+            Brands = Repository.Brands.GetAll().Select(x => x.FromRepoBrandToDomainBrand()).ToList();
+            Messages = Repository.Messages.GetAll().Select(x => x.FromRepoMessageToDomainMessage()).ToList();
+            Speaches = Repository.Speaches.GetAll().Select(x => x.FromRepoSpeachToDomainSpeach()).ToList();
+            botClient = new TelegramBotClient("986923820:AAH7Df3wrTKkfsusnCrWpnash3RZPChCOgI");
+            Task.Run(() => SendMessage());
+        }        
 
         List<DomainBrands> Brands;
         List<DomainCar> Cars;
@@ -28,7 +36,6 @@ namespace DomainService.Service
         List<DomainBuyer> Buyers;
         List<DomainSpeach> Speaches;
         List<DomainMessage> Messages;
-        List<DomainMessage> LatestMessages;
 
         // telegramm
         public void SendMessage()
@@ -87,19 +94,12 @@ namespace DomainService.Service
             return value;
         }
 
-        public Service(IUnitOfWork Repository)
+        public void CreateBrand(string brandName)
         {
-            _Repositories = Repository;
-            Cars = Repository.Cars.GetAll().Select(x => x.FromRepoCarToDomainCar()).ToList();
-            BuyCars = Repository.BuyCars.GetAll().Select(x => x.FromRepoBuyCarToDomainBuyCar()).ToList();
-            Buyers = Repository.Buyers.GetAll().Select(x => x.FromRepoBuyerToDomainBuyer()).ToList();
-            Brands = Repository.Brands.GetAll().Select(x => x.FromRepoBrandToDomainBrand()).ToList();
-            Messages = Repository.Messages.GetAll().Select(x => x.FromRepoMessageToDomainMessage()).ToList();
-            Speaches = Repository.Speaches.GetAll().Select(x => x.FromRepoSpeachToDomainSpeach()).ToList();
-            LatestMessages = new List<DomainMessage>();
-            botClient = new TelegramBotClient("986923820:AAH7Df3wrTKkfsusnCrWpnash3RZPChCOgI");
-            Task.Run(() => SendMessage());
+            DomainBrands brand = new DomainBrands { BrandName = brandName };
+            _Repositories.Brands.Create(brand.FromDomainBrandToRepoBrand());
         }
+
         //
         public IEnumerable<DomainBrands> GetAllBrands()
         {
@@ -255,10 +255,12 @@ namespace DomainService.Service
             _Repositories.Cars.Update(car.FromDomainCarToRepoCar());
         }
 
+
+        // Чистка от мусора
         public void DeleteRangeCars()
-        {
-            _Repositories.Cars.DeleteRange();
-            _Repositories.Speaches.DeleteRange();
+        {            
+            _Repositories.Cars.DeleteWasteEntities();
+            _Repositories.Speaches.DeleteWasteEntities();
             Speaches.Clear();
             Speaches = _Repositories.Speaches.GetAll().Select(x => x.FromRepoSpeachToDomainSpeach()).ToList();
             Messages.Clear();
@@ -268,9 +270,8 @@ namespace DomainService.Service
             BuyCars.Clear();
             BuyCars = _Repositories.BuyCars.GetAll().Select(x => x.FromRepoBuyCarToDomainBuyCar()).ToList();
         }
-
-
-        //               
+        // Чистка от мусора
+                               
         public bool Buy(DomainBuyCar item)
         {
             DomainCar car = Cars.FirstOrDefault(x => x.Id == item.CarId);
@@ -280,7 +281,9 @@ namespace DomainService.Service
             if (obj == null)
             {
                 botClient = new TelegramBotClient("986923820:AAH7Df3wrTKkfsusnCrWpnash3RZPChCOgI");
-                Bot_OnMessage(item.Buyer.Email + " хочет купить " + item.Car.Name, Buyers.First(x => x.Id == car.OwnerId).TelegramID);
+                int chatid = Buyers.FirstOrDefault(x => x.Id == car.OwnerId).TelegramID;
+                if(chatid!=0)
+                Task.Run(()=>Bot_OnMessage(item.Buyer.Email + " хочет купить " + item.Car.Name, chatid));
 
                 _Repositories.BuyCars.Create(item.FromDomainBuyCarToRepoBuyCar());
                 BuyCars.Add(item);
@@ -289,10 +292,7 @@ namespace DomainService.Service
 
             return false;
         }
-        //
-
-
-        //
+        
         public IEnumerable<DomainBuyer> GetAllBuyers()
         {
             return Buyers;
@@ -312,14 +312,11 @@ namespace DomainService.Service
             return domainBuyers;
         }
 
-        //
         public DomainBuyer GetBuyer(int id)
         {
             return Buyers.FirstOrDefault(x => x.Id == id);
         }
 
-
-        //
         public void CreateBuyer(string email, string phone)
         {
             DomainBuyer model = new DomainBuyer { Email = email, Telephone = phone };
@@ -330,7 +327,6 @@ namespace DomainService.Service
 
         }
 
-        //
         public DomainBuyer GetBuyer(string email)
         {
             DomainBuyer model = Buyers.FirstOrDefault(x => x.Email == email);
@@ -346,21 +342,18 @@ namespace DomainService.Service
             return model;
         }
 
-        //
         public void Create_Buyer(DomainBuyer item)
         {
             _Repositories.Buyers.Create(item.FromDomainBuyerToRepoBuyer());
             Buyers.Clear();
             Buyers = _Repositories.Buyers.GetAll().Select(x => x.FromRepoBuyerToDomainBuyer()).ToList();
         }
-
-        //
+                
         public void Update_Buyer(DomainBuyer item)
         {
 
         }
-
-        //
+                
         public void Delete_Buyer(int id)
         {
             _Repositories.Buyers.Delete(id);
@@ -447,14 +440,12 @@ namespace DomainService.Service
         {
             return Speaches.Where(x => x.IdCar == IdCar && x.IsDeleted == false);
         }
-
-        // 
+                 
         public IEnumerable<DomainSpeach> GetUserSpeach(int idUser)
         {
             return Speaches.Where(x => x.IdUser == idUser && x.IsDeleted == false).ToList();
         }
-
-        // 
+                 
         public IEnumerable<DomainSpeach> GetOwnerSpeach(int id)
         {
             return Speaches.Where(x => x.IdOwner == id && x.IsDeleted == false).ToList();
@@ -490,7 +481,6 @@ namespace DomainService.Service
             _Repositories.Speaches.Update(speach.FromDomainSpeachToSpeachSpeach());
         }
 
-
         // Создать сообщение
         public void CreateMessage(int idSpeach, string name, string messages)
         {
@@ -498,23 +488,6 @@ namespace DomainService.Service
             DomainMessage mes = new DomainMessage() { IdUser = id, SpeachId = idSpeach, Text = messages, Name = name };
             _Repositories.Messages.Create(mes.FromDomainSpeachToRepoSpeach());
             Messages.Add(mes);
-            LatestMessages.Add(mes);
-        }
-
-        // Пока для получения сообщении на странички с помощью js(доработать js)
-        public string GetLatestMessage(int idSpeach)
-        {
-            DomainMessage objmessage = LatestMessages.FirstOrDefault(x=>x.SpeachId==idSpeach);
-            if (objmessage == null)
-            {
-                LatestMessages.Remove(objmessage);
-                //Messages.Add(objmessage);
-                //_Repositories.Messages.Create(objmessage.FromDomainSpeachToRepoSpeach());
-                string message = "objmessage.Name +   objmessage.Text";
-                return message;
-            }
-            else
-                return null;
-        }        
+        }              
     }
 }

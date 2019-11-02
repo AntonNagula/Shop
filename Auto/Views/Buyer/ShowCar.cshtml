@@ -3,17 +3,39 @@
     Layout = "~/Views/Shared/NewHead.cshtml";
     ViewBag.Title = "Информация для покупателя";
 }
-@*<html>
-<head>
-    <link type="text/css" rel="stylesheet" href="~/Content/Site.css" />
-</head>
-<body>*@
-    <div class="present">
-        <h1>@Model.Name</h1>
-        <h3>Цена: @Model.Price</h3>
-        <hr />
-        <p><img src="~/Files/@Model.ExtencionName" width="600" height="400" alt="@Model.Name"></p>
-        <p class="Info">@Model.Info</p>
-    </div>
-@*</body>
-</html>*@
+<div class="present">
+    <h1>@Model.Name</h1>
+    <h3>Цена: @Model.Price</h3>
+    <hr />
+    <input type="hidden" name="id" id="Id" value=@Model.Id />
+    <button id="btnsend" class="btn btn-primary">Избранное</button>
+    <hr />
+    <p><img src="~/Files/@Model.ExtencionName" width="600" height="400" alt="@Model.Name"></p>
+    <p class="Info">@Model.Info</p>
+
+</div>
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+            $("#btnsend").click(function () {
+                var id = $("#Id").val();
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: '{"id":"' + id + '"}',
+                    url: "@Url.Action("Buy")",
+                    dataType: "json",
+                    success: function (response) {
+                        alert(response.value);
+
+                    },
+                    error: function (response) {
+
+                    }
+                });
+            });
+        });
+</script>

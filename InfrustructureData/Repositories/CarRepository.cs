@@ -31,15 +31,26 @@ namespace InfrustructureData.Repositories
             db.SaveChanges();            
         }
 
-        public void DeleteRange()
+        public void DeleteWasteEntities()
         {
-            List<BuyCar> buycars= db.BuyCars.Include(x => x.Car).Where(x => x.Car.OwnerId == null || x.Car.Status == "Запрет админа").ToList();
+            List<BuyCar> buycars = db.BuyCars.Include(x => x.Car).Where(x => x.Car.OwnerId == null || x.Car.Status != "Продается").ToList();
             db.BuyCars.RemoveRange(buycars);
             db.SaveChanges();
-            List<Car> cars=db.Cars.Where(x=>x.OwnerId== null || x.Status == "Запрет админа").ToList();
+            List<Car> cars = db.Cars.Where(x => x.OwnerId == null || x.Status != "Продается").ToList();
             db.Cars.RemoveRange(cars);
             db.SaveChanges();
         }
+
+        public void DeleteRange(List<RepoCar> items)
+        {            
+            foreach (RepoCar b in items)
+            {
+                Car delete = db.Cars.FirstOrDefault(x => x.Id == b.Id);
+                db.Cars.Remove(delete);
+            }
+            db.SaveChanges();
+        }
+
         public RepoCar Get(int id)
         {
             if (id != 0)

@@ -47,12 +47,25 @@ namespace InfrustructureData.Repositories
             return db.Messages.Where(x=>x.SpeachId==id).Select(x => x.FromMessageToRepoMessage()).ToList();
         }
 
-        public void DeleteRange()
+        public void Update(RepoMessage item)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(RepoMessage item)
+        public void DeleteRange(List<RepoMessage> items)
+        {            
+            foreach (RepoMessage b in items)
+            {
+                if (b.Id != 0)
+                {
+                    Message delete = db.Messages.FirstOrDefault(x => x.Id == b.Id);
+                    db.Messages.Remove(delete);
+                }
+            }
+            db.SaveChanges();
+        }
+
+        public void DeleteWasteEntities()
         {
             throw new NotImplementedException();
         }

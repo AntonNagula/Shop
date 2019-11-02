@@ -6,6 +6,7 @@ namespace InfrustructureData.Data
 {
     public class AutoContext : DbContext
     {
+        string connectionstring;
         public DbSet<Buyer> Buyers { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<BuyCar> BuyCars { get; set; }
@@ -17,14 +18,16 @@ namespace InfrustructureData.Data
             Database.EnsureCreated();
         }
 
-        public AutoContext()
+        public AutoContext(string _connectionstring)
         {
+            connectionstring = _connectionstring;
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Shop;Trusted_Connection=True;");
-            
+            //optionsBuilder.UseSqlServer(@"Server=nagulaproduction.database.windows.net;Initial Catalog=AutoProjectDB;User ID=nagulaanton;Password=3061643aA!;Connect Timeout=30;Encrypt=True;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            optionsBuilder.UseSqlServer(connectionstring);
+
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

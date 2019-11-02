@@ -21,14 +21,6 @@ namespace Auto.Controllers
         {
             unit = Unit;
         }
-        //public ActionResult Index(int i = 1)
-        //{
-        //    int Total,size=6;
-        //    List<AppCar> b = unit.GetAllCars(i,size,out Total).Select(x => x.FromDomainCarToRepoCar()).ToList();             
-        //    PageInfo page = new PageInfo { PageSize = size, PageNumber = i, TotalItems = Total};
-        //    IndexViewModel index = new IndexViewModel { PageInfo = page, Cars = b };
-        //    return View(index);
-        //}
 
         public ActionResult Index(int i = 1, string brand = "Все")
         {

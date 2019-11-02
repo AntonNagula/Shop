@@ -14,7 +14,7 @@ namespace IoC
     {       
 
         public override void Load()
-        {            
+        {
             Bind<IRepositories<RepoBuyer>>().To<BuyerRepository>().InSingletonScope();
             Bind<IRepositories<RepoCar>>().To<CarRepository>().InSingletonScope();
             Bind<IRepositories<RepoBrands>>().To<BrandRepository>().InSingletonScope();
@@ -23,7 +23,7 @@ namespace IoC
             Bind<IService>().To<Service>().InSingletonScope();
             Bind<IRepositories<RepoMessage>>().To<MessageRepository>().InSingletonScope();
             Bind<IRepositories<RepoSpeach>>().To<SpeachRepository>().InSingletonScope();
-            Bind<AutoContext>().ToSelf().InSingletonScope();
+            Bind<AutoContext>().ToSelf().InSingletonScope().WithConstructorArgument("_connectionstring", c => Config.ConnectionString);
         }
 
     }

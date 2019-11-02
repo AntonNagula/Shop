@@ -51,5 +51,15 @@ namespace InfrustructureData.Repositories
             db.BuyCars.Remove(obj);
             db.SaveChanges();
         }
+
+        public void DeleteRange(List<RepoBuyCar> items)
+        {
+            foreach (RepoBuyCar b in items)
+            {
+                BuyCar delete=db.BuyCars.FirstOrDefault(x=>x.CarId==b.CarId && x.BuyerId==b.BuyerId);
+                db.BuyCars.Remove(delete);
+            }
+            db.SaveChanges();
+        }
     }
 }

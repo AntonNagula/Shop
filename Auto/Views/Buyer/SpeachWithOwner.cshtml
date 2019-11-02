@@ -1,0 +1,69 @@
+﻿@model Auto.ModelsApp.FormForDialoge
+@{
+    Layout = "~/Views/Shared/NewHead.cshtml";
+    ViewBag.Title = "BuyersForCar";
+}
+@{int SpeachId = Model.messages[0].SpeachId; }
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <input id="SpeachId" type="hidden" name="SpeachId" value=@Model.Id />
+            <input class="form-control" id="message" type="text" name="message" />
+            <br />
+            <button class="btn btn-success" id="btnsend">Отправить</button>
+        </div>
+    <div class="col-md-6" id="divmsg">
+        @foreach (var i in Model.messages)
+        {
+            <p>@i.Name:@i.Text</p>
+        }
+    </div>
+    
+    </div>
+</div>
+
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnsend").click(function () {
+                send();
+            });
+            setInterval(function () {
+                var SpeachId = $("#SpeachId").val();
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: '{"SpeachId":"' + SpeachId + '"}',
+                    url: "@Url.Action("ReciveMSG")",
+                    dataType: "json",
+                    success: function (response) {
+                        var data = $("#divmsg").html();
+                        $("#divmsg").html(data + "<p>" + response+"</p>");
+                    },
+                    error: function (response) {
+                    }
+                });
+            }, 5000);
+            function send() {
+                var message = $("#message").val();
+                var SpeachId = $("#SpeachId").val();
+                var data = $("#divmsg").html();
+                $("#divmsg").html(data + "<p>@Model.Name:" + message + "</p>");
+                $("#message").val("");
+                debugger;
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: '{"message":"' + message + '","SpeachId":"' + SpeachId+'"}',
+                    url: "@Url.Action("sendmsg")",
+                    dataType: "json",
+                    success: function (response) {
+                        var data = $("#divmsg").html();
+                        $("#divmsg").html(data + "<p>@Model.Name:" + message+"</p>");
+                    },
+                    error: function (response) {
+                    }
+                });
+            }
+        });
+</script>

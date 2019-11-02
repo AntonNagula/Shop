@@ -45,19 +45,7 @@ namespace InfrustructureData.Repositories
         {
             return db.Speaches.Where(x => x.IdCar == id).Select(x => x.FromSpeachToRepoSpeach()).ToList();
         }
-
-        public void DeleteRange()
-        {
-            List<Speach> speaches = db.Speaches.Where(x=>x.IsDeleted==true).ToList();
-            for (int i = 0; i < speaches.Count; i++)
-            {
-                List<Message> messages = db.Messages.Where(x => x.SpeachId==speaches[i].Id).ToList();
-                if (messages != null)
-                    db.Messages.RemoveRange(messages);
-            }
-            db.Speaches.RemoveRange(speaches);
-            db.SaveChanges();
-        }
+               
                                
         public void Update(RepoSpeach item)
         {
@@ -69,6 +57,29 @@ namespace InfrustructureData.Repositories
             sp.IdCar = item.IdCar;
             sp.IsDeleted = item.IsDeleted;
             db.Entry(sp).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public void DeleteWasteEntities()
+        {
+            List<Speach> speaches = db.Speaches.Where(x => x.IsDeleted == true).ToList();
+            for (int i = 0; i < speaches.Count; i++)
+            {
+                List<Message> messages = db.Messages.Where(x => x.SpeachId == speaches[i].Id).ToList();
+                if (messages != null)
+                    db.Messages.RemoveRange(messages);
+            }
+            db.Speaches.RemoveRange(speaches);
+            db.SaveChanges();
+        }
+
+        public void DeleteRange(List<RepoSpeach> items)
+        {            
+            foreach (RepoSpeach b in items)
+            {
+                Speach delete = db.Speaches.FirstOrDefault(x => x.Id == b.Id);
+                db.Speaches.Remove(delete);
+            }
             db.SaveChanges();
         }
     }

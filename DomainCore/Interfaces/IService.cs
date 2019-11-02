@@ -47,7 +47,6 @@ namespace DomainCore.Interfaces
         IEnumerable<DomainMessage> OwnerGetMessages(int OwnerId,int UserId, int AutoId);
         void CreateSpeach(int AutoId, int UserId);
         void CreateMessage(int idSpeach, string name, string messages);
-        string GetLatestMessage(int idSpeach);
         void DelSpeach(int IdSpeach);
 
         int Create_Code_Telegramm(int Id, string telephone);

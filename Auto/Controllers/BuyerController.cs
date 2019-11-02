@@ -55,7 +55,7 @@ namespace Auto.Controllers
             int buyerId = unit.GetBuyer(mail).Id;
             AppBuyCar b = new AppBuyCar { BuyerId = buyerId, CarId = id };
             bool result=unit.Buy(b.FromAppCarToDomainBuyCar());
-            string message;
+            string message;            
             if (result == true)
             {
                 message = "Благодарим за покупку";
@@ -181,33 +181,6 @@ namespace Auto.Controllers
         }
 
         [HttpPost]
-        public ActionResult Connect(EmailModel model)
-        {
-            string type_mail = model.From.Split(new char[] { '@' })[1].Split(new char[] { '.' })[0];
-            MailAddress from = new MailAddress(model.From, "АвтоМагазин");
-            MailAddress to = new MailAddress(model.To);
-            MailMessage m = new MailMessage(from, to);
-            m.Subject = model.Subject;
-            m.IsBodyHtml = false;
-            m.Body = model.Body;
-            SmtpClient smtp = new SmtpClient("smtp.mail.ru", 25);
-            if (type_mail == "gmail")
-            {
-                smtp = new SmtpClient("smtp." + type_mail + ".com", 587);
-            }
-            else
-            {
-                smtp = new SmtpClient("smtp." + type_mail + ".ru", 25);
-            }
-            smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential(model.From, model.password);
-            smtp.EnableSsl = true;
-            smtp.Send(m);
-            ViewBag.Message = "Сообщение отправлено";
-            return View("Buy");
-        }
-
-        [HttpPost]
         public ActionResult DeletePurch(int Id)
         {            
             int BuyerId = unit.GetBuyer(User.Identity.Name).Id;
@@ -234,7 +207,7 @@ namespace Auto.Controllers
 
         // Вызывается когда покупатель хочет поговорить с продавцом
         [HttpGet]
-        public ActionResult OwnerSpeach(int? OwnerId, int UserId, int CarId)
+        public ActionResult SpeachWithOwner(int? OwnerId, int UserId, int CarId)
         {
             if (OwnerId == null)
             {
@@ -250,7 +223,7 @@ namespace Auto.Controllers
         }
 
         [HttpPost]
-        public ActionResult OwnerSpeach(int SpeachId, string message)
+        public ActionResult SpeachWithOwner(int SpeachId, string message)
         {
             unit.CreateMessage(SpeachId, HttpContext.User.Identity.Name, message);
             List<AppMessage> messages = unit.GetMessages(SpeachId).Select(x => x.FromDomainMessageToAppMessage()).ToList();
@@ -278,14 +251,6 @@ namespace Auto.Controllers
         {
             unit.CreateMessage(SpeachId, HttpContext.User.Identity.Name, message);
             return Json(null);
-        }
-
-
-        [HttpGet]
-        public JsonResult ReciveMSG(int SpeachId)
-        {
-            string message = unit.GetLatestMessage(SpeachId);
-            return Json(message, JsonRequestBehavior.AllowGet);
         }
 
         // Два метода для привязки телеграмма к аккаунту

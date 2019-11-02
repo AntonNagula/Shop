@@ -26,11 +26,7 @@
                 </p>
                 <p>
                     @Html.DisplayFor(modelItem => item.Price)$
-                </p>
-                <p>
-                    <input type="hidden" name="id" id="Id" value=@item.Id />
-                    <button id="btnsend" class="btn btn-primary">Избранное</button>
-                </p>
+                </p>                
                 <p>
                     <form method="get" action="/Buyer/ShowCar/@item.Id">
                         <button class="btn btn-primary">Подробнее</button>
@@ -45,28 +41,3 @@
 <div class="row btn-group" id="center">
     @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new { i = x }))
 </div>
-
-
-
-
-<script type="text/javascript">
-    $(document).ready(function () {
-            $("#btnsend").click(function () {
-                var id = $("#Id").val();
-                $.ajax({
-                    type: "POST",
-                    contentType: "application/json; charset=utf-8",
-                    data: '{"Id":"' + id + '"}',
-                    url: "@Url.Action("Buy")",
-                    dataType: "json",
-                    success: function (response) {
-                        alert(response.value);
-
-                    },
-                    error: function (response) {
-                        
-                    }
-                });
-            });
-        });
-</script>

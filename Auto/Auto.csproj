@@ -261,6 +261,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BuyerController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Filters\WayEnterAttribute.cs" />
@@ -315,6 +316,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\util.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -370,7 +372,6 @@
     <Content Include="Views\Buyer\UpdateCar.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
-    <Content Include="Views\Buyer\Connect.cshtml" />
     <Content Include="Views\Buyer\DeletePurch.cshtml" />
     <Content Include="Views\Admin\DeleteCars.cshtml" />
     <Content Include="Views\Shared\Reg.cshtml" />
@@ -381,10 +382,12 @@
     <Content Include="Views\Shared\ForCreate.cshtml" />
     <Content Include="Views\Buyer\Speach.cshtml" />
     <Content Include="Views\Buyer\AutoSpeach.cshtml" />
-    <Content Include="Views\Buyer\OwnerSpeach.cshtml" />
+    <Content Include="Views\Buyer\SpeachWithOwner.cshtml" />
     <Content Include="Views\Buyer\DelSpeach.cshtml" />
     <Content Include="Views\Buyer\ConnectTelegramm.cshtml" />
     <Content Include="Views\Buyer\Buy.cshtml" />
+    <Content Include="Views\Buyer\MyProfile.cshtml" />
+    <Content Include="Views\Chat\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

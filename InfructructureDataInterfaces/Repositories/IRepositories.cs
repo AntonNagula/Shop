@@ -14,6 +14,7 @@ namespace InfructructureDataInterfaces.Repositories
         void Create(T item);
         void Update(T item);
         void Delete(int id);
-        void DeleteRange();
+        void DeleteRange(List<T> items);
+        void DeleteWasteEntities();
     }
 }

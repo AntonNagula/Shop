@@ -128,6 +128,7 @@ namespace Auto.Controllers
         {
             List<AppBuyer> buyers=unit.GetBuyersByCarId(Id).Select(x => x.FromDomainBuyerToRepoBuyer()).ToList();
             ViewBag.CarId = Id;
+            ViewBag.OwnerId = unit.GetBuyer(HttpContext.User.Identity.Name).Id;
             return View(buyers);
         }
 

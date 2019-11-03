@@ -1,4 +1,39 @@
-﻿@{
+﻿@model Auto.ModelsApp.FormForDialoge
+@*    @{
+        Layout = "~/Views/Shared/NewHead.cshtml";
+        ViewBag.Title = "BuyersForCar";
+    }
+    @{int SpeachId = Model.messages[0].SpeachId; }
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <input id="hdId" type="hidden" />
+                <input id="username" type="hidden" value=@Model.Name/>
+                <input id="SpeachId" type="hidden" name="SpeachId" value=@Model.Id />
+                <input class="form-control" id="message" type="text" name="message" />
+                <br />
+                <button class="btn btn-success" id="btnsend">Отправить</button>
+            </div>
+            <div class="col-md-6" id="divmsg">
+                @foreach (var i in Model.messages)
+                {
+                    <p>@i.Name:@i.Text</p>
+                }
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--Ссылка на библиотеку SignalR -->
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <!--Ссылка на автоматически сгенерированный скрипт хаба SignalR -->
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/util.js"></script>*@
+
+
+
+@{
 
     Layout = null;
 }
@@ -9,9 +44,13 @@
 
 </head>
 <body>
+    <h2>Чат-комната</h2>
+
     <div class="main">        
         <div id="chatBody">
-            <div id="inputForm">
+            <div id="inputForm">                
+                <input id="SpeachId" type="hidden" value=@Model.Id />
+                <input id="username" type="hidden" value=@Model.Name />
                 <input type="text" id="message" />
                 <input type="button" id="sendmessage" value="Отправить" />
             </div>

@@ -570,3 +570,9 @@ C:\Users\Banderos\Desktop\проект на стажировку\Последн�
 C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\obj\Debug\Auto.pdb
 C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\Telegram.Bot.dll
 C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\Telegram.Bot.xml
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\Microsoft.AspNet.SignalR.Core.pdb
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+C:\Users\Banderos\Desktop\проект на стажировку\Последняя версия\Auto\Auto\bin\Microsoft.AspNet.SignalR.SystemWeb.xml

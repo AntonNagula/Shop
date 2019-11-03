@@ -6,10 +6,8 @@
 
     <table class="table">
         <tr>
-
             <th>Почта</th>
             <th>Чат</th>
-            <th>Написать</th>
         </tr>        
         @if (Model!=null)
         { foreach (var i in Model)
@@ -18,9 +16,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => i.Email)
                 </td>
-                <td>                    
-                    <form method="get" action="/Buyer/Speach">
-                        <input type="hidden" name="IdUser" value="@i.Id" />
+                <td>  
+                    <form method="get" action="/Chat/Index">
+                        <input type="hidden" name="OwnerId" value="@ViewBag.OwnerId" />
+                        <input type="hidden" name="UserId" value=@i.Id />
                         <input type="hidden" name="CarId" value="@ViewBag.CarId" />
                         <button class="btn btn-success">Чат</button>
                     </form>
